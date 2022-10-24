@@ -3,12 +3,19 @@ package com.example.projectprm.view.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.projectprm.R;
+import com.example.projectprm.model.entities.Category;
+import com.example.projectprm.model.repos.CategoryRepository;
+import com.example.projectprm.view.adapter.CategoriesListAdapter;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +32,10 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    RecyclerView categoriesListRec;
+    CategoriesListAdapter categoriesListAdapter;
+    List<Category> categoryList;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -61,6 +72,22 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+
+        categoriesListRec = view.findViewById(R.id.categoryRecycler);
+
+        categoryList = new CategoryRepository(this.getActivity().getApplication()).getAll();
+
+        setCategoryRecycler(categoryList);
+        return view;
+    }
+
+    private void setCategoryRecycler(List<Category> datalist){
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this.getContext(), 2);
+        categoriesListRec.setLayoutManager(layoutManager);
+
+        categoriesListAdapter = new CategoriesListAdapter(this.getContext(), datalist);
+        categoriesListRec.setAdapter(categoriesListAdapter);
     }
 }

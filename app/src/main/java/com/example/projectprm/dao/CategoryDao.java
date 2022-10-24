@@ -1,6 +1,7 @@
 package com.example.projectprm.dao;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -10,6 +11,7 @@ import com.example.projectprm.model.entities.Category;
 
 import java.util.List;
 
+@Dao
 public interface CategoryDao {
 
     @Insert
@@ -25,5 +27,5 @@ public interface CategoryDao {
     public List<Category> getAll();
 
     @Query("SELECT * FROM Category WHERE cat_id = :categoryId")
-    public void get(int categoryId);
+    public List<Category> get(int categoryId);
 }
