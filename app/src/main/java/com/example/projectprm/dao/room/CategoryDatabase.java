@@ -12,7 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.projectprm.dao.CategoryDao;
 import com.example.projectprm.model.entities.Category;
 
-@Database(entities = {Category.class}, version = 1)
+@Database(entities = {Category.class}, version = 1, exportSchema = false)
 public abstract class CategoryDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "script.db";
 
