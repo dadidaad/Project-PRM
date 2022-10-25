@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -11,10 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.projectprm.R;
+import com.example.projectprm.model.entities.Book;
 import com.example.projectprm.model.entities.Category;
+import com.example.projectprm.model.entities.Price;
+import com.example.projectprm.model.repos.BookRepository;
 import com.example.projectprm.model.repos.CategoryRepository;
+import com.example.projectprm.model.repos.PriceRepository;
 import com.example.projectprm.view.adapter.CategoriesListAdapter;
+import com.example.projectprm.view.adapter.NewestBookAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +44,10 @@ public class HomeFragment extends Fragment {
     CategoriesListAdapter categoriesListAdapter;
     List<Category> categoryList;
 
+    RecyclerView newestBookListRec;
+    NewestBookAdapter newestBookAdapter;
+    List<Book> bookList;
+    List<Price> priceList;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -76,18 +87,29 @@ public class HomeFragment extends Fragment {
 
 
         categoriesListRec = view.findViewById(R.id.categoryRecycler);
+        newestBookListRec = view.findViewById(R.id.newestBookRec);
 
         categoryList = new CategoryRepository(this.getActivity().getApplication()).getAll();
+        bookList = new BookRepository(this.getActivity().getApplication()).getAll();
+        priceList = new PriceRepository(this.requireActivity().getApplication()).getAll();
 
         setCategoryRecycler(categoryList);
+        setNewestBookRecycler(bookList, priceList);
         return view;
     }
-
     private void setCategoryRecycler(List<Category> datalist){
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this.getContext(), 2);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         categoriesListRec.setLayoutManager(layoutManager);
 
         categoriesListAdapter = new CategoriesListAdapter(this.getContext(), datalist);
         categoriesListRec.setAdapter(categoriesListAdapter);
+    }
+
+    private void setNewestBookRecycler(List<Book> bookList, List<Price> priceList){
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        newestBookListRec.setLayoutManager(layoutManager);
+
+        newestBookAdapter = new NewestBookAdapter(this.getContext(), bookList, priceList);
+        newestBookListRec.setAdapter(newestBookAdapter);
     }
 }
