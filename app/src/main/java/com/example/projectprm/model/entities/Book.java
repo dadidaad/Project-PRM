@@ -6,7 +6,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.sql.Date;
+
+import java.util.Date;
+
 
 @Entity(tableName = "Book")
 public class Book {
