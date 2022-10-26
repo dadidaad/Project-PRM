@@ -1,5 +1,6 @@
 package com.example.projectprm.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,9 +19,13 @@ import com.example.projectprm.model.entities.Price;
 import com.example.projectprm.model.repos.BookRepository;
 import com.example.projectprm.model.repos.CategoryRepository;
 import com.example.projectprm.model.repos.PriceRepository;
+import com.example.projectprm.view.activities.ListBookActivity;
+import com.example.projectprm.view.activities.MainActivity;
 import com.example.projectprm.view.adapter.CategoriesListAdapter;
 import com.example.projectprm.view.adapter.NewestBookAdapter;
+import com.example.projectprm.view.adapter.OnClickItemRecyclerView;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +34,7 @@ import java.util.List;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -101,15 +106,31 @@ public class HomeFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         categoriesListRec.setLayoutManager(layoutManager);
 
-        categoriesListAdapter = new CategoriesListAdapter(this.getContext(), datalist);
+        categoriesListAdapter = new CategoriesListAdapter(this.getContext(), datalist, this);
         categoriesListRec.setAdapter(categoriesListAdapter);
     }
 
     private void setNewestBookRecycler(List<Book> bookList, List<Price> priceList){
+        List<Book> newestBookList = new ArrayList<>();
+
+        for(Book b : bookList){
+            if(b.getAddDate().getMonth() == 10 && b.getAddDate().getYear() == 2022){
+                newestBookList.add(b);
+            }
+        }
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         newestBookListRec.setLayoutManager(layoutManager);
 
-        newestBookAdapter = new NewestBookAdapter(this.getContext(), bookList, priceList);
+        newestBookAdapter = new NewestBookAdapter(this.getContext(), newestBookList, priceList);
         newestBookListRec.setAdapter(newestBookAdapter);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(this.getContext(), ListBookActivity.class);
+
+        intent.putExtra("CatID", categoryList.get(position).getCategoryId());
+
+        startActivity(intent);
     }
 }

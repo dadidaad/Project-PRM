@@ -25,6 +25,6 @@ public interface BookDAO {
     @Query("SELECT * FROM Book")
     public List<Book> getAll();
 
-    @Query("SELECT * FROM book WHERE cat_id = :bookId")
+    @Query("SELECT * FROM book WHERE book_id = :bookId")
     public List<Book> get(int bookId);
 }
