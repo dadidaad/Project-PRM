@@ -12,11 +12,13 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.projectprm.dao.CategoryDao;
 import com.example.projectprm.dao.PriceDAO;
+import com.example.projectprm.model.entities.Author;
+import com.example.projectprm.model.entities.Book;
 import com.example.projectprm.model.entities.Category;
 import com.example.projectprm.model.entities.Price;
 import com.example.projectprm.utils.converters.DateConverter;
 
-@Database(entities = {Price.class}, version = 1, exportSchema = false)
+@Database(entities = {Price.class, Book.class, Author.class, Category.class}, version = 1, exportSchema = false)
 @TypeConverters({DateConverter.class})
 public abstract class PriceDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "script.db";

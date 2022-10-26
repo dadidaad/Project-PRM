@@ -42,7 +42,7 @@ public class NewestBookAdapter extends RecyclerView.Adapter<NewestBookAdapter.Ne
         holder.bookName.setText(books.get(position).getBookName());
         for(Price p : prices){
             if(p.getBookID() == books.get(position).getBookID() && p.getToDate() == null){
-                holder.bookPrice.setText(p.getPrice());
+                holder.bookPrice.setText(String.valueOf(p.getPrice()));
                 break;
             }
         }

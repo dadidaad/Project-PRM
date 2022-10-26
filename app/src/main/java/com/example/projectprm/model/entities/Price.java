@@ -3,14 +3,15 @@ package com.example.projectprm.model.entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(tableName = "Price")
+@Entity(tableName = "Price", foreignKeys = @ForeignKey(entity = Book.class, parentColumns = "book_id", childColumns = "book_id"))
 public class Price {
 
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "price_id")
     private int priceID;
@@ -70,6 +71,7 @@ public class Price {
     public void setToDate(Date toDate) {
         this.toDate = toDate;
     }
+
 
     public int getBookID() {
         return bookID;

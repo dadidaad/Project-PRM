@@ -2,17 +2,22 @@ package com.example.projectprm.model.entities;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 
 import java.util.Date;
 
-
-@Entity(tableName = "Book")
+@Entity(tableName = "Book", foreignKeys = {
+        @ForeignKey(entity = Author.class, parentColumns = "author_id", childColumns = "author_id"
+        ),
+        @ForeignKey(entity = Category.class, parentColumns = "cat_id", childColumns = "cat_id")})
 public class Book {
-    @PrimaryKey(autoGenerate = false)
+    
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "book_id")
     private int bookID;
@@ -28,19 +33,40 @@ public class Book {
     @ColumnInfo(name = "desc")
     private String description;
 
-    @NonNull
     @ColumnInfo(name = "units_in_stock")
-    private String unitInStock;
+    @NonNull
+    private int unitInStock;
 
     @ColumnInfo(name = "units_order")
-    private String unitOrder;
+    private Integer unitOrder;
 
     @ColumnInfo(name = "avg_stars")
-    private String avgStar;
+    private Double avgStars;
 
-    @NonNull
     @ColumnInfo(name = "author_id")
-    private String authorID;
+    private Integer authorID;
+
+    @ColumnInfo(name = "cat_id")
+    private Integer catID;
+
+    @ColumnInfo(name = "image")
+    private String image;
+
+    public Book() {
+    }
+
+    public Book(int bookID, @NonNull String bookName, @NonNull Date addDate, String description, int unitInStock, Integer unitOrder, Double avgStars, Integer authorID, Integer catID, String image) {
+        this.bookID = bookID;
+        this.bookName = bookName;
+        this.addDate = addDate;
+        this.description = description;
+        this.unitInStock = unitInStock;
+        this.unitOrder = unitOrder;
+        this.avgStars = avgStars;
+        this.authorID = authorID;
+        this.catID = catID;
+        this.image = image;
+    }
 
     public int getBookID() {
         return bookID;
@@ -76,62 +102,51 @@ public class Book {
         this.description = description;
     }
 
-    @NonNull
-    public String getUnitInStock() {
+    public int getUnitInStock() {
         return unitInStock;
     }
 
-    public void setUnitInStock(@NonNull String unitInStock) {
+    public void setUnitInStock(int unitInStock) {
         this.unitInStock = unitInStock;
     }
 
-    public String getUnitOrder() {
+    public Integer getUnitOrder() {
         return unitOrder;
     }
 
-    public void setUnitOrder(String unitOrder) {
+    public void setUnitOrder(Integer unitOrder) {
         this.unitOrder = unitOrder;
     }
 
-    public String getAvgStar() {
-        return avgStar;
+    public Double getAvgStars() {
+        return avgStars;
     }
 
-    public void setAvgStar(String avgStar) {
-        this.avgStar = avgStar;
+    public void setAvgStars(Double avgStars) {
+        this.avgStars = avgStars;
     }
 
-    @NonNull
-    public String getAuthorID() {
+    public Integer getAuthorID() {
         return authorID;
     }
 
-    public void setAuthorID(@NonNull String authorID) {
+    public void setAuthorID(Integer authorID) {
         this.authorID = authorID;
     }
 
-    @NonNull
-    public String getCatID() {
+    public Integer getCatID() {
         return catID;
     }
 
-    public void setCatID(@NonNull String catID) {
+    public void setCatID(Integer catID) {
         this.catID = catID;
     }
 
-    @NonNull
-    @ColumnInfo(name = "cat_id")
-    private String catID;
+    public String getImage() {
+        return image;
+    }
 
-    public Book(int bookID, @NonNull String bookName, @NonNull Date addDate, String description, @NonNull String unitInStock, String unitOrder, String avgStar, @NonNull String authorID, @NonNull String catID) {
-        this.bookID = bookID;
-        this.bookName = bookName;
-        this.addDate = addDate;
-        this.description = description;
-        this.unitInStock = unitInStock;
-        this.unitOrder = unitOrder;
-        this.avgStar = avgStar;
-        this.authorID = authorID;
-        this.catID = catID;
+    public void setImage(String image) {
+        this.image = image;
     }
 }
