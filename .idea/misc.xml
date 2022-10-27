@@ -3,11 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/drawable/bg_corner_yellow_corner.xml" value="0.243" />
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/drawable/bg_gray_corner.xml" value="0.243" />
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/drawable/bg_white_corner.xml" value="0.243" />
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/drawable/bg_white_corner_gray_border.xml" value="0.243" />
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/drawable/bg_yellow_corner_top.xml" value="0.243" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.245" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/drawable/search_bg.xml" value="0.245" />
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/activity_book_detail.xml" value="0.25416666666666665" />
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/activity_comment_and_rate.xml" value="0.25416666666666665" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/activity_list_book.xml" value="0.25416666666666665" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/activity_view_comment.xml" value="0.25416666666666665" />
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/activity_whish_list.xml" value="0.25416666666666665" />
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/activity_whish_list_detail.xml" value="0.25416666666666665" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/categories_list_item.xml" value="0.25416666666666665" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/filter_diaglog_bottom.xml" value="0.1824074074074074" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/filter_dialog_sheet.xml" value="0.24010416666666667" />
@@ -17,6 +27,9 @@
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/fragment_profile.xml" value="0.25416666666666665" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/newest_book_item.xml" value="0.25" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/purchased_book_item.xml" value="0.24010416666666667" />
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/review_list_item.xml" value="0.264" />
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/whishlist_dialog.xml" value="0.25416666666666665" />
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/whishlist_item.xml" value="0.24010416666666667" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/menu/menu_botton_nav.xml" value="0.1" />
       </map>
     </option>

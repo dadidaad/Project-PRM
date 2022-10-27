@@ -90,22 +90,26 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-
+        //Get Category Recycler View and Init Data
         categoriesListRec = view.findViewById(R.id.categoryRecycler);
-        newestBookListRec = view.findViewById(R.id.newestBookRec);
-
         categoryList = new CategoryRepository(this.getActivity().getApplication()).getAll();
+        setCategoryRecycler(categoryList);
+
+        //Get NewestBook Recycler View and Init Data
+        newestBookListRec = view.findViewById(R.id.newestBookRec);
         bookList = new BookRepository(this.getActivity().getApplication()).getAll();
         priceList = new PriceRepository(this.requireActivity().getApplication()).getAll();
-
-        setCategoryRecycler(categoryList);
         setNewestBookRecycler(bookList, priceList);
+
         return view;
     }
+    //Set Category for RecyclerView Category
     private void setCategoryRecycler(List<Category> datalist){
+        //Inflate Layout Linear
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         categoriesListRec.setLayoutManager(layoutManager);
 
+        //Init and set Adapter
         categoriesListAdapter = new CategoriesListAdapter(this.getContext(), datalist, this);
         categoriesListRec.setAdapter(categoriesListAdapter);
     }
@@ -114,7 +118,9 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
         List<Book> newestBookList = new ArrayList<>();
 
         for(Book b : bookList){
-            if(b.getAddDate().getMonth() == 10 && b.getAddDate().getYear() == 2022){
+            int month = b.getAddDate().getMonth();
+            int year = b.getAddDate().getYear();
+            if(b.getAddDate().getMonth() + 1 == 10  && b.getAddDate().getYear() == 122){
                 newestBookList.add(b);
             }
         }
