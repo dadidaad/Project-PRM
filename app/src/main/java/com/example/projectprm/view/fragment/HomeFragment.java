@@ -15,9 +15,11 @@ import android.view.ViewGroup;
 import com.example.projectprm.R;
 import com.example.projectprm.model.entities.Book;
 import com.example.projectprm.model.entities.Category;
+import com.example.projectprm.model.entities.OrderDetail;
 import com.example.projectprm.model.entities.Price;
 import com.example.projectprm.model.repos.BookRepository;
 import com.example.projectprm.model.repos.CategoryRepository;
+import com.example.projectprm.model.repos.OrderDetailRepository;
 import com.example.projectprm.model.repos.PriceRepository;
 import com.example.projectprm.view.activities.ListBookActivity;
 import com.example.projectprm.view.activities.MainActivity;
@@ -53,6 +55,14 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
     NewestBookAdapter newestBookAdapter;
     List<Book> bookList;
     List<Price> priceList;
+
+    RecyclerView highestRateRec;
+    List<Book> highestRateBookList;
+    NewestBookAdapter highestBookAdapter;
+
+    RecyclerView bestSellingRec;
+    List<Book> bestSellingBookList;
+    NewestBookAdapter bestSellingBookAdapter;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -90,22 +100,35 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-
+        //Get Category Recycler View and Init Data
         categoriesListRec = view.findViewById(R.id.categoryRecycler);
-        newestBookListRec = view.findViewById(R.id.newestBookRec);
-
         categoryList = new CategoryRepository(this.getActivity().getApplication()).getAll();
+        setCategoryRecycler(categoryList);
+
+        //Get NewestBook Recycler View and Init Data
+        newestBookListRec = view.findViewById(R.id.newestBookRec);
         bookList = new BookRepository(this.getActivity().getApplication()).getAll();
         priceList = new PriceRepository(this.requireActivity().getApplication()).getAll();
-
-        setCategoryRecycler(categoryList);
         setNewestBookRecycler(bookList, priceList);
+
+        //Get HighestBook Recycler View and Init Data;
+        highestRateBookList = new BookRepository(this.getActivity().getApplication()).getHighestRatBook();
+        highestRateRec = view.findViewById(R.id.highestRateRec);
+        setHighestBookRecycler(highestRateBookList.subList(0,5),priceList);
+
+        //Get Best Selling Recycler View and Init Data;
+        bestSellingBookList = new BookRepository(this.getActivity().getApplication()).getAll();
+        bestSellingRec = view.findViewById(R.id.bestSellingRec);
+        setBestSellingBookRecycler(bookList, priceList);
         return view;
     }
+    //Set Category for RecyclerView Category
     private void setCategoryRecycler(List<Category> datalist){
+        //Inflate Layout Linear
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         categoriesListRec.setLayoutManager(layoutManager);
 
+        //Init and set Adapter
         categoriesListAdapter = new CategoriesListAdapter(this.getContext(), datalist, this);
         categoriesListRec.setAdapter(categoriesListAdapter);
     }
@@ -114,7 +137,9 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
         List<Book> newestBookList = new ArrayList<>();
 
         for(Book b : bookList){
-            if(b.getAddDate().getMonth() == 10 && b.getAddDate().getYear() == 2022){
+            int month = b.getAddDate().getMonth();
+            int year = b.getAddDate().getYear();
+            if(b.getAddDate().getMonth() + 1 == 10  && b.getAddDate().getYear() == 122){
                 newestBookList.add(b);
             }
         }
@@ -123,6 +148,33 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
 
         newestBookAdapter = new NewestBookAdapter(this.getContext(), newestBookList, priceList);
         newestBookListRec.setAdapter(newestBookAdapter);
+    }
+
+    private void setHighestBookRecycler(List<Book> bookList, List<Price> priceList){
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        highestRateRec.setLayoutManager(layoutManager);
+
+        highestBookAdapter = new NewestBookAdapter(this.getContext(), bookList, priceList);
+        highestRateRec.setAdapter(highestBookAdapter);
+    }
+
+    private void setBestSellingBookRecycler(List<Book> bookList, List<Price> priceList){
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        bestSellingRec.setLayoutManager(layoutManager);
+
+        List<Book>filterBestSellingBook = new ArrayList<>();
+        List<OrderDetail> allOrderDetails = new OrderDetailRepository(this.getActivity().getApplication()).getAll();
+        List<Integer> bestSellingBookID = new OrderDetailRepository(this.getActivity().getApplication()).getListBestSellingBookID();
+
+        for( int i=0; i< bookList.size(); i++){
+            for (int j : bestSellingBookID){
+                if(j==bookList.get(i).getBookID()){
+                    filterBestSellingBook.add(bookList.get(i));
+                }
+            }
+        }
+        bestSellingBookAdapter = new NewestBookAdapter(this.getContext(), filterBestSellingBook.subList(0,5), priceList);
+        bestSellingRec.setAdapter(bestSellingBookAdapter);
     }
 
     @Override

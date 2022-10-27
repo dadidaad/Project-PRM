@@ -20,6 +20,7 @@ public class Price {
     @ColumnInfo(name = "price")
     private int price;
 
+    public Price(){}
     public Price(int priceID, int price, @NonNull Date fromDate, Date toDate, int bookID) {
         this.priceID = priceID;
         this.price = price;

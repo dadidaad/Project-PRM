@@ -16,11 +16,13 @@ public class PriceRepository {
     private PriceDAO priceDAO;
 
     private List<Price> allPrice;
+    private List<Price> allPriceOrder;
 
     public PriceRepository(Application application) {
         PriceDatabase priceDatabase = PriceDatabase.getINSTANCE(application);
         priceDAO = priceDatabase.priceDAO();
         allPrice = priceDAO.getAll();
+        allPriceOrder = priceDAO.getOrderByPrice();
     }
     public void insert(Price model) {
         new PriceRepository.InsertCourseAsyncTask(priceDAO).execute(model);
@@ -37,6 +39,9 @@ public class PriceRepository {
     }
     public List<Price> getAll() {
         return allPrice;
+    }
+    public List<Price> getAllPriceOrder() {
+        return allPriceOrder;
     }
     private static class InsertCourseAsyncTask extends AsyncTask<Price, Void, Void> {
         private PriceDAO priceDAO;

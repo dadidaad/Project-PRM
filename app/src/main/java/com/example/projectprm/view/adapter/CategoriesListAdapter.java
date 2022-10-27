@@ -1,6 +1,8 @@
 package com.example.projectprm.view.adapter;
 
 import android.content.Context;
+import android.net.Uri;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectprm.R;
 import com.example.projectprm.model.entities.Category;
+import com.example.projectprm.utils.converters.PathConverter;
 
+import java.io.File;
 import java.util.List;
 
 public class CategoriesListAdapter extends RecyclerView.Adapter<CategoriesListAdapter.CategoriesListViewHolder> {
@@ -36,7 +40,11 @@ public class CategoriesListAdapter extends RecyclerView.Adapter<CategoriesListAd
 
     @Override
     public void onBindViewHolder(@NonNull CategoriesListViewHolder holder, int position) {
-        holder.catLogo.setImageResource(R.drawable.book_logo);
+
+        int resID = new PathConverter().GetResource(context,categoriesList.get(position).getDescription());
+
+        holder.catLogo.setImageResource(resID);
+
         holder.catText.setText(categoriesList.get(position).getCategoryName());
     }
 
@@ -45,6 +53,7 @@ public class CategoriesListAdapter extends RecyclerView.Adapter<CategoriesListAd
         return categoriesList.size();
     }
 
+    //Holder View
     public static class CategoriesListViewHolder extends RecyclerView.ViewHolder{
 
         ImageView catLogo;
@@ -66,6 +75,7 @@ public class CategoriesListAdapter extends RecyclerView.Adapter<CategoriesListAd
                         }
                     }
                 }
+
             });
         }
     }

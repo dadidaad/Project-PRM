@@ -41,13 +41,12 @@ public class ListBookAdapter extends RecyclerView.Adapter<ListBookAdapter.ListBo
     @Override
     public void onBindViewHolder(@NonNull ListBookViewHolder holder, int position) {
         holder.bookName.setText(books.get(position).getBookName());
-//        for(Price p : prices){
-//            if(p.getBookID() == books.get(position).getBookID() && p.getToDate() == null){
-//                holder.bookPrice.setText(p.getPrice());
-//                break;
-//            }
-//        }
-        holder.bookPrice.setText("100000");
+        for(Price p : prices){
+            if(p.getBookID() == books.get(position).getBookID() && p.getToDate() == null){
+                holder.bookPrice.setText(String.valueOf(p.getPrice()));
+                break;
+            }
+        }
     }
 
     @Override

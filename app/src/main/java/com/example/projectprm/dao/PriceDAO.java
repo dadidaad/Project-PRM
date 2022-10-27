@@ -27,4 +27,7 @@ public interface PriceDAO {
 
     @Query("SELECT * FROM Price WHERE price_id = :priceId")
     public List<Price> get(int priceId);
+
+    @Query("SELECT * FROM Price Order by price")
+    public List<Price> getOrderByPrice();
 }

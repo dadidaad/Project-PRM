@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projectprm.R;
 import com.example.projectprm.model.entities.Book;
 import com.example.projectprm.model.entities.Price;
+import com.example.projectprm.utils.converters.PathConverter;
 
 import org.w3c.dom.Text;
 
@@ -42,10 +43,12 @@ public class NewestBookAdapter extends RecyclerView.Adapter<NewestBookAdapter.Ne
         holder.bookName.setText(books.get(position).getBookName());
         for(Price p : prices){
             if(p.getBookID() == books.get(position).getBookID() && p.getToDate() == null){
-                holder.bookPrice.setText(String.valueOf(p.getPrice()));
+                holder.bookPrice.setText(String.valueOf(p.getPrice()) + "đ");
                 break;
             }
         }
+        int resid = new PathConverter().GetResource(context,books.get(position).getImage());
+        holder.bookImage.setImageResource(resid);
     }
 
     @Override

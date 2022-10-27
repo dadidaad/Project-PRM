@@ -18,11 +18,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.List;
 
-public class DialogBottomFragment extends BottomSheetDialogFragment implements OnClickItemRecyclerView {
+public class DialogBottomFragment extends BottomSheetDialogFragment{
     private List<String> listItem;
-
-    public DialogBottomFragment(List<String> listItem) {
+    private OnClickItemRecyclerView onClickItemRecyclerView;
+    public DialogBottomFragment(List<String> listItem, OnClickItemRecyclerView onClickItemRecyclerView) {
         this.listItem = listItem;
+        this.onClickItemRecyclerView = onClickItemRecyclerView;
     }
 
     @NonNull
@@ -37,15 +38,10 @@ public class DialogBottomFragment extends BottomSheetDialogFragment implements O
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
         dialogSheet.setLayoutManager(linearLayoutManager);
-        DialogAdapter dialogAdapter = new DialogAdapter(listItem, this);
+        DialogAdapter dialogAdapter = new DialogAdapter(listItem, onClickItemRecyclerView);
 
         dialogSheet.setAdapter(dialogAdapter);
 
         return bottomSheetDialog;
-    }
-
-    @Override
-    public void onItemClick(int position) {
-
     }
 }

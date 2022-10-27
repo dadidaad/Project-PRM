@@ -17,10 +17,13 @@ public class BookRepository {
 
     private List<Book> allBook;
 
+    private List<Book> highestRatBook;
+
     public BookRepository(Application application) {
         BookDatabase categoryDatabase = BookDatabase.getINSTANCE(application);
         bookDAO = categoryDatabase.bookDAO();
         allBook = bookDAO.getAll();
+        highestRatBook = bookDAO.getBookOrderRate();
     }
 
     public void insert(Book model) {
@@ -39,6 +42,10 @@ public class BookRepository {
 
     public List<Book> getAll() {
         return allBook;
+    }
+
+    public List<Book> getHighestRatBook(){
+        return highestRatBook;
     }
 
     private static class InsertCourseAsyncTask extends AsyncTask<Book, Void, Void> {
