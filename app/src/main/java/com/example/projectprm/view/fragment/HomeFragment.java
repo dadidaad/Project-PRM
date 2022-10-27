@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.projectprm.R;
 import com.example.projectprm.model.entities.Book;
@@ -63,6 +64,10 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
     RecyclerView bestSellingRec;
     List<Book> bestSellingBookList;
     NewestBookAdapter bestSellingBookAdapter;
+
+    TextView txtNewest;
+    TextView txtHighestRating;
+    TextView txtBestSelling;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -119,7 +124,25 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
         //Get Best Selling Recycler View and Init Data;
         bestSellingBookList = new BookRepository(this.getActivity().getApplication()).getAll();
         bestSellingRec = view.findViewById(R.id.bestSellingRec);
-        setBestSellingBookRecycler(bookList, priceList);
+        //setBestSellingBookRecycler(bookList, priceList);
+
+        //Init action for txt SeeMore
+        txtNewest = view.findViewById(R.id.txtNewest);
+        txtHighestRating = view.findViewById(R.id.txtHighestRating);
+        txtBestSelling = view.findViewById(R.id.txtBestSelling);
+
+        txtNewest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initListBook("newest");
+            }
+        });
+        txtHighestRating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initListBook("highestRate");
+            }
+        });
         return view;
     }
     //Set Category for RecyclerView Category
@@ -176,13 +199,21 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
         bestSellingBookAdapter = new NewestBookAdapter(this.getContext(), filterBestSellingBook.subList(0,4), priceList);
         bestSellingRec.setAdapter(bestSellingBookAdapter);
     }
-
-    @Override
-    public void onItemClick(int position) {
+    public void initListBook(String tag){
         Intent intent = new Intent(this.getContext(), ListBookActivity.class);
-
-        intent.putExtra("CatID", categoryList.get(position).getCategoryId());
-
+        intent.putExtra("tag", tag);
         startActivity(intent);
+    }
+    @Override
+    public void onItemClick(int position, String tag) {
+        if(tag=="category") {
+            Intent intent = new Intent(this.getContext(), ListBookActivity.class);
+
+            intent.putExtra("CatID", categoryList.get(position).getCategoryId());
+
+            startActivity(intent);
+        }else{
+            return;
+        }
     }
 }

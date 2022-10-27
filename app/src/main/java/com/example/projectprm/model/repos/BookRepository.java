@@ -18,6 +18,7 @@ public class BookRepository {
     private List<Book> allBook;
 
     private List<Book> highestRatBook;
+    private List<Book> listGetByCategory;
 
     public BookRepository(Application application) {
         BookDatabase categoryDatabase = BookDatabase.getINSTANCE(application);
@@ -46,6 +47,9 @@ public class BookRepository {
 
     public List<Book> getHighestRatBook(){
         return highestRatBook;
+    }
+    public List<Book> getListGetByCategory(int catID){
+        return bookDAO.getBookByCategory(catID);
     }
 
     private static class InsertCourseAsyncTask extends AsyncTask<Book, Void, Void> {

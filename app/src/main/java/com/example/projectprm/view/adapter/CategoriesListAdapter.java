@@ -71,7 +71,7 @@ public class CategoriesListAdapter extends RecyclerView.Adapter<CategoriesListAd
                     if(onClickItemRecyclerView != null){
                         int pos = getAdapterPosition();
                         if(pos != RecyclerView.NO_POSITION){
-                            onClickItemRecyclerView.onItemClick(pos);
+                            onClickItemRecyclerView.onItemClick(pos, "category");
                         }
                     }
                 }

@@ -30,4 +30,7 @@ public interface BookDAO {
 
     @Query("SELECT * FROM book Order by avg_stars desc")
     public List<Book> getBookOrderRate();
+
+    @Query("SELECT * FROM book WHERE cat_id = :catId")
+    public List<Book> getBookByCategory(int catId);
 }

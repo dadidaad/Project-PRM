@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.projectprm.R;
 import com.example.projectprm.model.entities.Book;
 import com.example.projectprm.model.entities.Price;
+import com.example.projectprm.model.repos.BookRepository;
 import com.example.projectprm.model.repos.PriceRepository;
 import com.example.projectprm.view.adapter.ListBookAdapter;
 import com.example.projectprm.view.adapter.NewestBookAdapter;
@@ -43,8 +44,8 @@ public class ListBookActivity extends AppCompatActivity implements OnClickItemRe
         setContentView(R.layout.activity_list_book);
 
 
-        int catId = getIntent().getIntExtra("CatID",1);
-
+        int catId = getIntent().getIntExtra("CatID",-1);
+        String tag = getIntent().getStringExtra("tag");
         listBookRec = findViewById(R.id.listBookRec);
         searchView = findViewById(R.id.searchView);
         filterText = findViewById(R.id.filterText);
@@ -70,43 +71,32 @@ public class ListBookActivity extends AppCompatActivity implements OnClickItemRe
                 return true;
             }
         });
+        priceList = new PriceRepository(this.getApplication()).getAll();
+        //Init data case Category
+        if(catId != -1) {
+            bookList = new BookRepository(this.getApplication()).getListGetByCategory(catId);
+            setListBookRecycler(bookList, priceList);
+        }
+        if(tag!=null) {
+            if (tag.equals("newest")) {
 
+                bookList = new BookRepository(this.getApplication()).getAll();
+                List<Book> newestBookList = new ArrayList<>();
 
-        Book book = new Book();
-        book.setBookName("COTE");
-        book.setBookID(1);
-
-        Book book2 = new Book();
-        book2.setBookName("SpyxFamily");
-        book2.setBookID(2);
-
-        Book book3 = new Book();
-        book3.setBookName("Overflow");
-        book3.setBookID(3);
-
-        bookList = new ArrayList<>();
-        bookList.add(book);
-        bookList.add(book2);
-        bookList.add(book3);
-
-        Price price = new Price();
-        price.setBookID(1);
-        price.setPrice(10000);
-
-        Price price2 = new Price();
-        price2.setBookID(2);
-        price2.setPrice(50000);
-
-        Price price3 = new Price();
-        price3.setBookID(3);
-        price3.setPrice(200000);
-
-        priceList= new ArrayList<>();
-        priceList.add(price);
-        priceList.add(price2);
-        priceList.add(price3);
-
-        setListBookRecycler(bookList, priceList);
+                for (Book b : bookList) {
+                    int month = b.getAddDate().getMonth();
+                    int year = b.getAddDate().getYear();
+                    if (b.getAddDate().getMonth() + 1 == 10 && b.getAddDate().getYear() == 122) {
+                        newestBookList.add(b);
+                    }
+                }
+                setListBookRecycler(newestBookList, priceList);
+            }
+            if (tag.equals("highestRate")) {
+                bookList = new BookRepository(this.getApplication()).getHighestRatBook();
+                setListBookRecycler(bookList, priceList);
+            }
+        }
     }
 
     private void filterList(String newText) {
@@ -145,7 +135,7 @@ public class ListBookActivity extends AppCompatActivity implements OnClickItemRe
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(int position, String tag) {
         List<Book> filteredBookList = new ArrayList<>();
         List<Price> filterPriceList = new ArrayList<>();
 
