@@ -20,15 +20,6 @@ public class Price {
     @ColumnInfo(name = "price")
     private int price;
 
-    public Price(){}
-    public Price(int priceID, int price, @NonNull Date fromDate, Date toDate, int bookID) {
-        this.priceID = priceID;
-        this.price = price;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
-        this.bookID = bookID;
-    }
-
     @NonNull
     @ColumnInfo(name = "from_date")
     private Date fromDate;
@@ -39,6 +30,17 @@ public class Price {
     @NonNull
     @ColumnInfo(name = "book_id")
     private int bookID;
+
+    public Price() {
+    }
+
+    public Price(int priceID, int price, @NonNull Date fromDate, Date toDate, int bookID) {
+        this.priceID = priceID;
+        this.price = price;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.bookID = bookID;
+    }
 
     public int getPriceID() {
         return priceID;
@@ -72,7 +74,6 @@ public class Price {
     public void setToDate(Date toDate) {
         this.toDate = toDate;
     }
-
 
     public int getBookID() {
         return bookID;

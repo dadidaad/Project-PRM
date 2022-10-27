@@ -173,7 +173,7 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
                 }
             }
         }
-        bestSellingBookAdapter = new NewestBookAdapter(this.getContext(), filterBestSellingBook.subList(0,5), priceList);
+        bestSellingBookAdapter = new NewestBookAdapter(this.getContext(), filterBestSellingBook.subList(0,4), priceList);
         bestSellingRec.setAdapter(bestSellingBookAdapter);
     }
 
