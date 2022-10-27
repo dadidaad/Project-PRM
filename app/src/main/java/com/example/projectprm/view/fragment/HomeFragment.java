@@ -124,7 +124,7 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
         //Get Best Selling Recycler View and Init Data;
         bestSellingBookList = new BookRepository(this.getActivity().getApplication()).getAll();
         bestSellingRec = view.findViewById(R.id.bestSellingRec);
-        //setBestSellingBookRecycler(bookList, priceList);
+        setBestSellingBookRecycler(bookList, priceList);
 
         //Init action for txt SeeMore
         txtNewest = view.findViewById(R.id.txtNewest);
@@ -193,10 +193,11 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
             for (int j : bestSellingBookID){
                 if(j==bookList.get(i).getBookID()){
                     filterBestSellingBook.add(bookList.get(i));
+                    break;
                 }
             }
         }
-        bestSellingBookAdapter = new NewestBookAdapter(this.getContext(), filterBestSellingBook.subList(0,4), priceList);
+        bestSellingBookAdapter = new NewestBookAdapter(this.getContext(), filterBestSellingBook, priceList);
         bestSellingRec.setAdapter(bestSellingBookAdapter);
     }
     public void initListBook(String tag){
