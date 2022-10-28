@@ -43,6 +43,15 @@ public class Account {
     public Account() {
     }
 
+    public Account(@NonNull String username, @NonNull String password, Date dateOfBirth, String displayName, String address, @NonNull String type) {
+        this.username = username;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+        this.displayName = displayName;
+        this.address = address;
+        this.type = type;
+    }
+
     public Account(int accountId, @NonNull String username, @NonNull String password, Date dateOfBirth, String displayName, String address, @NonNull String type, Date createdDate) {
         this.accountId = accountId;
         this.username = username;
