@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,13 +21,13 @@ import com.example.projectprm.model.repos.BookRepository;
 import com.example.projectprm.model.repos.CategoryRepository;
 import com.example.projectprm.model.repos.OrderDetailRepository;
 import com.example.projectprm.model.repos.PriceRepository;
+import com.example.projectprm.view.activities.BookDetailActivity;
 import com.example.projectprm.view.activities.ListBookActivity;
-import com.example.projectprm.view.activities.MainActivity;
 import com.example.projectprm.view.adapter.CategoriesListAdapter;
 import com.example.projectprm.view.adapter.NewestBookAdapter;
 import com.example.projectprm.view.adapter.OnClickItemRecyclerView;
+import com.example.projectprm.view.adapter.PurchasedListAdapter;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +55,7 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
     NewestBookAdapter newestBookAdapter;
     List<Book> bookList;
     List<Price> priceList;
+    List<Book> newestBookList;
 
     RecyclerView highestRateRec;
     List<Book> highestRateBookList;
@@ -64,6 +64,10 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
     RecyclerView bestSellingRec;
     List<Book> bestSellingBookList;
     NewestBookAdapter bestSellingBookAdapter;
+
+    RecyclerView purchasedBookRec;
+    List<Book> purchasedBookList;
+    PurchasedListAdapter purchasedListAdapter;
 
     TextView txtNewest;
     TextView txtHighestRating;
@@ -126,6 +130,10 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
         bestSellingRec = view.findViewById(R.id.bestSellingRec);
         setBestSellingBookRecycler(bookList, priceList);
 
+        //Get Purchased Book Recycler View and Init Data;
+        purchasedBookRec = view.findViewById(R.id.purchasedRec);
+
+
         //Init action for txt SeeMore
         txtNewest = view.findViewById(R.id.txtNewest);
         txtHighestRating = view.findViewById(R.id.txtHighestRating);
@@ -157,7 +165,7 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
     }
 
     private void setNewestBookRecycler(List<Book> bookList, List<Price> priceList){
-        List<Book> newestBookList = new ArrayList<>();
+        newestBookList = new ArrayList<>();
 
         for(Book b : bookList){
             int month = b.getAddDate().getMonth();
@@ -169,7 +177,7 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         newestBookListRec.setLayoutManager(layoutManager);
 
-        newestBookAdapter = new NewestBookAdapter(this.getContext(), newestBookList, priceList);
+        newestBookAdapter = new NewestBookAdapter(this.getContext(), newestBookList, priceList, this);
         newestBookListRec.setAdapter(newestBookAdapter);
     }
 
@@ -177,7 +185,7 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         highestRateRec.setLayoutManager(layoutManager);
 
-        highestBookAdapter = new NewestBookAdapter(this.getContext(), bookList, priceList);
+        highestBookAdapter = new NewestBookAdapter(this.getContext(), bookList, priceList, this);
         highestRateRec.setAdapter(highestBookAdapter);
     }
 
@@ -197,7 +205,7 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
                 }
             }
         }
-        bestSellingBookAdapter = new NewestBookAdapter(this.getContext(), filterBestSellingBook, priceList);
+        bestSellingBookAdapter = new NewestBookAdapter(this.getContext(), filterBestSellingBook, priceList, this);
         bestSellingRec.setAdapter(bestSellingBookAdapter);
     }
     public void initListBook(String tag){
@@ -213,7 +221,14 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
             intent.putExtra("CatID", categoryList.get(position).getCategoryId());
 
             startActivity(intent);
-        }else{
+        }else if(tag == "viewDetail"){
+            Intent intent = new Intent(this.getContext(), BookDetailActivity.class);
+
+            intent.putExtra("bookId", newestBookList.get(position).getBookID());
+
+            startActivity(intent);
+        }
+        else{
             return;
         }
     }

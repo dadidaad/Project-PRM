@@ -44,7 +44,7 @@ public class BookRepository {
     public List<Book> getAll() {
         return allBook;
     }
-
+    public Book getByID(int bookId) { return bookDAO.get(bookId);}
     public List<Book> getHighestRatBook(){
         return highestRatBook;
     }

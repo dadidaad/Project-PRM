@@ -25,5 +25,5 @@ public interface AuthorDao {
     public List<Author> getAll();
 
     @Query("SELECT * FROM Author WHERE author_id = :authorId")
-    public List<Author> get(int authorId);
+    public Author get(int authorId);
 }

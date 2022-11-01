@@ -1,333 +1,339 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/txtBookDescription"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.activities.BookDetailActivity">
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="0dp"
-        android:layout_height="400dp"
-        android:adjustViewBounds="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/cover_book" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:tint="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Classroom of the Elite"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:tint="#c1ed21"
-        app:layout_constraintBottom_toBottomOf="@+id/textView12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView12"
-        app:srcCompat="@drawable/ic_baseline_star_24" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="4.5"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-        app:layout_constraintEnd_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView5" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:text="100000 đ"
-        android:textColor="#f70a0a"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Còn 8 Sản Phẩm"
-        android:textColor="#0af741"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView14"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView14" />
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#c2d7fc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.activities.BookDetailActivity">
+
+        <ImageView
+            android:id="@+id/bookDetailImage"
+            android:layout_width="0dp"
+            android:layout_height="400dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/cover_book" />
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:tint="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/txtBookDetailName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:text="+"
-            android:textSize="32sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="16dp"
+            android:text="Classroom of the Elite"
+            android:textSize="25sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/bookDetailImage" />
 
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="1"
-            android:textSize="26sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView16"
-            app:layout_constraintStart_toEndOf="@+id/textView16"
-            app:layout_constraintTop_toTopOf="@+id/textView16" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="19dp"
-            android:text="-"
-            android:textSize="32sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView16"
-            app:layout_constraintStart_toEndOf="@+id/textView17"
-            app:layout_constraintTop_toTopOf="@+id/textView16" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="3dp"
-            android:backgroundTint="#fcfcfc"
-            android:text="Add to Cart"
-            android:textColor="#fa0202"
-            app:layout_constraintBottom_toBottomOf="@+id/button3"
-            app:layout_constraintEnd_toStartOf="@+id/button3"
-            app:layout_constraintTop_toTopOf="@+id/button3" />
-
-        <Button
-            android:id="@+id/button3"
+        <ImageView
+            android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:backgroundTint="#fa0202"
-            android:text="Buy Now"
-            app:icon="@drawable/ic_baseline_shopping_cart_24"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:tint="#c1ed21"
+            app:layout_constraintBottom_toBottomOf="@+id/txtBookDetailName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@+id/txtBookDetailName"
+            app:srcCompat="@drawable/ic_baseline_star_24" />
+
+        <TextView
+            android:id="@+id/txtBookDetailStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="4.5"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+            app:layout_constraintEnd_toStartOf="@+id/imageView5"
+            app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+        <TextView
+            android:id="@+id/txtBookDetailPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:text="100000 đ"
+            android:textColor="#f70a0a"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtBookDetailName" />
+
+        <TextView
+            android:id="@+id/txtBookDetailUnitInStock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Còn 8 Sản Phẩm"
+            android:textColor="#0af741"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtBookDetailPrice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtBookDetailPrice" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#c2d7fc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtBookDetailPrice">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="+"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="1"
+                android:textSize="26sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView16"
+                app:layout_constraintStart_toEndOf="@+id/textView16"
+                app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="19dp"
+                android:text="-"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView16"
+                app:layout_constraintStart_toEndOf="@+id/textView17"
+                app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="3dp"
+                android:backgroundTint="#fcfcfc"
+                android:text="Add to Cart"
+                android:textColor="#fa0202"
+                app:layout_constraintBottom_toBottomOf="@+id/button3"
+                app:layout_constraintEnd_toStartOf="@+id/button3"
+                app:layout_constraintTop_toTopOf="@+id/button3" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#fa0202"
+                android:text="Buy Now"
+                app:icon="@drawable/ic_baseline_shopping_cart_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:text="PhotoGallery"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+        <ImageView
+            android:id="@+id/gallery1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="19dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView19"
+            app:srcCompat="@drawable/cover_book" />
+
+        <ImageView
+            android:id="@+id/gallery2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/gallery1"
+            app:layout_constraintStart_toEndOf="@+id/gallery1"
+            app:layout_constraintTop_toTopOf="@+id/gallery1"
+            app:srcCompat="@drawable/cover_book" />
+
+        <ImageView
+            android:id="@+id/gallery3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/gallery2"
+            app:layout_constraintStart_toEndOf="@+id/gallery2"
+            app:layout_constraintTop_toTopOf="@+id/gallery2"
+            app:srcCompat="@drawable/cover_book" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="Book Information"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gallery1" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="Book ID"
+            android:textColor="#f70a0a"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+        <TextView
+            android:id="@+id/txtBookDetailID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:text="1"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView21"
+            app:layout_constraintStart_toEndOf="@+id/textView21"
+            app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="Release Date"
+            android:textColor="#f70a0a"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+        <TextView
+            android:id="@+id/txtBookRelease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2022-10-20 12:00:00"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView23"
+            app:layout_constraintStart_toStartOf="@+id/txtBookDetailID"
+            app:layout_constraintTop_toTopOf="@+id/textView23" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="Author"
+            android:textColor="#f70a0a"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+        <TextView
+            android:id="@+id/txtBookAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Kinugasa"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView25"
+            app:layout_constraintStart_toStartOf="@+id/txtBookRelease"
+            app:layout_constraintTop_toTopOf="@+id/textView25" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="About"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+        <TextView
+            android:id="@+id/txtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Kiêu hãnh chiến đấu, rồi hi sinh. Số phận của Tám Sáu là vậy. Lòng ham sống đã bị họ bỏ lại ở quá khứ rất xa. Họ từng nghĩ, từng tin như vậy.Thế nhưng, lối sống mà Tám Sáu theo đuổi bấy lâu dường như bị coi thường, bị xem là biểu hiện điên rồ không hơn không kém khi đặt cạnh cách mà những thiếu nữ người máy Sirin lao ra chiến trường, sẵn sàng bị giẫm nát, phá hủy và chôn vùi. Shin khổ sở khi tìm kiếm ý nghĩa của việc sống tiếp"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.333"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+        <Button
+            android:id="@+id/btn_cmt_rate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#4287f5"
+            android:text="Comment and Rating"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+
+        <Button
+            android:id="@+id/btn_dialogWhish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Whishlist"
+            app:icon="@drawable/ic_baseline_bookmark_24"
+            app:iconPadding="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView19"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView19" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:text="PhotoGallery"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="19dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19"
-        app:srcCompat="@drawable/cover_book" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="@+id/imageView6"
-        app:srcCompat="@drawable/cover_book" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toTopOf="@+id/imageView7"
-        app:srcCompat="@drawable/cover_book" />
-
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Book Information"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Book ID"
-        android:textColor="#f70a0a"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
-
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:text="1"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView21"
-        app:layout_constraintStart_toEndOf="@+id/textView21"
-        app:layout_constraintTop_toTopOf="@+id/textView21" />
-
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Release Date"
-        android:textColor="#f70a0a"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView21" />
-
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2022-10-20 12:00:00"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView23"
-        app:layout_constraintStart_toStartOf="@+id/textView22"
-        app:layout_constraintTop_toTopOf="@+id/textView23" />
-
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Author"
-        android:textColor="#f70a0a"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView23" />
-
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:text="Kinugasa"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView25"
-        app:layout_constraintStart_toStartOf="@+id/textView24"
-        app:layout_constraintTop_toTopOf="@+id/textView25" />
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="About"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
-
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Kiêu hãnh chiến đấu, rồi hi sinh. Số phận của Tám Sáu là vậy. Lòng ham sống đã bị họ bỏ lại ở quá khứ rất xa. Họ từng nghĩ, từng tin như vậy.Thế nhưng, lối sống mà Tám Sáu theo đuổi bấy lâu dường như bị coi thường, bị xem là biểu hiện điên rồ không hơn không kém khi đặt cạnh cách mà những thiếu nữ người máy Sirin lao ra chiến trường, sẵn sàng bị giẫm nát, phá hủy và chôn vùi. Shin khổ sở khi tìm kiếm ý nghĩa của việc sống tiếp"
-        android:textSize="16sp"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#4287f5"
-        android:text="Comment and Rating"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
-
-    <Button
-        android:id="@+id/btn_dialogWhish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Whishlist"
-        app:icon="@drawable/ic_baseline_bookmark_24"
-        app:iconPadding="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView19"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView19" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

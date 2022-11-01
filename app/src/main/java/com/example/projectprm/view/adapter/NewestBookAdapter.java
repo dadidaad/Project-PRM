@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,26 +15,26 @@ import com.example.projectprm.model.entities.Book;
 import com.example.projectprm.model.entities.Price;
 import com.example.projectprm.utils.converters.PathConverter;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class NewestBookAdapter extends RecyclerView.Adapter<NewestBookAdapter.NewestBookViewHolder> {
     Context context;
     List<Book> books;
     List<Price> prices;
+    private final OnClickItemRecyclerView onClickItemRecyclerView;
 
-    public NewestBookAdapter(Context context, List<Book> books, List<Price> prices) {
+    public NewestBookAdapter(Context context, List<Book> books, List<Price> prices, OnClickItemRecyclerView onClickItemRecyclerView) {
         this.context = context;
         this.books = books;
         this.prices = prices;
+        this.onClickItemRecyclerView = onClickItemRecyclerView;
     }
 
     @NonNull
     @Override
     public NewestBookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.newest_book_item, parent, false);
-        return new NewestBookAdapter.NewestBookViewHolder(view);
+        return new NewestBookAdapter.NewestBookViewHolder(view, onClickItemRecyclerView);
     }
 
     @Override
@@ -60,11 +59,25 @@ public class NewestBookAdapter extends RecyclerView.Adapter<NewestBookAdapter.Ne
         ImageView bookImage;
         TextView bookName, bookPrice;
         //Button addToCart;
-        public NewestBookViewHolder(@NonNull View itemView) {
+        public NewestBookViewHolder(@NonNull View itemView, OnClickItemRecyclerView onClickItemRecyclerView) {
             super(itemView);
             bookImage = itemView.findViewById(R.id.bookImage);
             bookName = itemView.findViewById(R.id.bookName);
             bookPrice = itemView.findViewById(R.id.bookPrice);
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    if(onClickItemRecyclerView != null){
+                        int pos = getAdapterPosition();
+                        if(pos != RecyclerView.NO_POSITION){
+                            onClickItemRecyclerView.onItemClick(pos, "viewDetail");
+                        }
+                    }
+                }
+
+            });
         }
     }
 }

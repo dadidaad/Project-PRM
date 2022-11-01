@@ -12,17 +12,73 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projectprm.R;
+import com.example.projectprm.dao.PriceDAO;
+import com.example.projectprm.model.entities.Book;
+import com.example.projectprm.model.repos.AuthorRepository;
+import com.example.projectprm.model.repos.BookRepository;
+import com.example.projectprm.model.repos.PriceRepository;
+import com.example.projectprm.utils.converters.PathConverter;
 
 public class BookDetailActivity extends AppCompatActivity {
 
     Button btnOpenDialogWhish;
+
+    ImageView bookDetailImage;
+    TextView txtBookDetailName;
+    TextView txtBookDetailStar;
+    TextView txtBookDetailPrice;
+    TextView txtBookDetailUnitInStock;
+    ImageView gallery1;
+    ImageView gallery2;
+    ImageView gallery3;
+    TextView txtBookDetailID;
+    TextView txtBookRelease;
+    TextView txtBookAuthor;
+    TextView txtDescription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
+
+        //Get Data
+        int bookId = getIntent().getIntExtra("bookId", 0);
+
+        Book book = new BookRepository(this.getApplication()).getByID(bookId);
+
+        //Get View
+        bookDetailImage = findViewById(R.id.bookDetailImage);
+        gallery1 = findViewById(R.id.gallery1);
+        gallery2 = findViewById(R.id.gallery2);
+        gallery3 = findViewById(R.id.gallery3);
+        txtBookDetailName = findViewById(R.id.txtBookDetailName);
+        txtBookDetailStar = findViewById(R.id.txtBookDetailStar);
+        txtBookDetailPrice = findViewById(R.id.txtBookDetailPrice);
+        txtBookDetailUnitInStock = findViewById(R.id.txtBookDetailUnitInStock);
+        txtBookDetailID = findViewById(R.id.txtBookDetailID);
+        txtBookRelease = findViewById(R.id.txtBookRelease);
+        txtBookAuthor = findViewById(R.id.txtBookAuthor);
+        txtDescription = findViewById(R.id.txtDescription);
+
+        int resID = new PathConverter().GetResource(this,book.getImage());
+        bookDetailImage.setImageResource(resID);
+        gallery1.setImageResource(resID);
+        gallery2.setImageResource(resID);
+        gallery3.setImageResource(resID);
+        txtBookDetailName.setText(book.getBookName());
+        txtBookDetailStar.setText(book.getAvgStars().toString());
+        txtBookDetailPrice.setText(String.valueOf(new PriceRepository(this.getApplication()).getPriceBookID(bookId).getPrice()) + "đ");
+        txtBookDetailUnitInStock.setText(String.valueOf(book.getUnitInStock()) + "Books Left");
+        txtBookDetailID.setText(String.valueOf(book.getBookID()));
+        txtBookRelease.setText(book.getAddDate().toString());
+        txtBookAuthor.setText(new AuthorRepository(this.getApplication()).getAuthorById(book.getAuthorID()).getAuthorName());
+        txtDescription.setText(book.getDescription());
+
 
         btnOpenDialogWhish = findViewById(R.id.btn_dialogWhish);
 

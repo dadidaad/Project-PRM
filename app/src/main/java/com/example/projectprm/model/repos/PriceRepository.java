@@ -17,6 +17,7 @@ public class PriceRepository {
 
     private List<Price> allPrice;
     private List<Price> allPriceOrder;
+    private Price priceByBookId;
 
     public PriceRepository(Application application) {
         PriceDatabase priceDatabase = PriceDatabase.getINSTANCE(application);
@@ -43,6 +44,7 @@ public class PriceRepository {
     public List<Price> getAllPriceOrder() {
         return allPriceOrder;
     }
+    public Price getPriceBookID(int bookId){return priceDAO.getByBookID(bookId);}
     private static class InsertCourseAsyncTask extends AsyncTask<Price, Void, Void> {
         private PriceDAO priceDAO;
 

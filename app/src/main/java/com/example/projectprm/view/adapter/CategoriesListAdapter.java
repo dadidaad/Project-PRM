@@ -64,6 +64,7 @@ public class CategoriesListAdapter extends RecyclerView.Adapter<CategoriesListAd
             catLogo = itemView.findViewById(R.id.catLogo);
             catText = itemView.findViewById(R.id.catText);
 
+
             itemView.setOnClickListener(new View.OnClickListener(){
 
                 @Override
