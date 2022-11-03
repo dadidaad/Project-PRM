@@ -27,4 +27,10 @@ public interface AccountDao {
     @Query("SELECT * FROM `Account` WHERE username = :username AND password = :password")
     public Account login(String username, String password);
 
+    @Query("SELECT * FROM `Account` WHERE username = :username")
+    public boolean isUserExist(String username);
+/*
+    @Query("INSERT INTO Account (username, password, dob, disp_name, address, type, created_date)\n" +
+            "VALUES (:username, :password, '', '', '', 'Customer', '')")
+    public long register(String username, String password);*/
 }

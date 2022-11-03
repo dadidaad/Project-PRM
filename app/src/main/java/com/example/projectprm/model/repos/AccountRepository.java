@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import com.example.projectprm.dao.AccountDao;
+import com.example.projectprm.dao.DatabaseHelper;
 import com.example.projectprm.dao.room.AccountDatabase;
 import com.example.projectprm.model.entities.Account;
 
@@ -14,16 +15,25 @@ public class AccountRepository {
     private AccountDao accountDao;
 
     private Account login;
+    private boolean isAccountExist;
 
-    public AccountRepository(Application application) {
+    public AccountRepository(Application application, String username) {
         AccountDatabase accountDatabase = AccountDatabase.getINSTANCE(application);
         accountDao = accountDatabase.accountDao();
+        isAccountExist = accountDao.isUserExist(username);
     }
 
     public AccountRepository(Application application, String username, String password) {
         AccountDatabase accountDatabase = AccountDatabase.getINSTANCE(application);
         accountDao = accountDatabase.accountDao();
         login = accountDao.login(username, password);
+    }
+
+    public AccountRepository(Application application, String username, String password, String type) {
+        AccountDatabase accountDatabase = AccountDatabase.getINSTANCE(application);
+        accountDao = accountDatabase.accountDao();
+        Account account = new Account(username, password, type);
+        accountDao.insert(account);
     }
 
     public void insert(Account model) {
@@ -41,6 +51,7 @@ public class AccountRepository {
     }
 
     public Account login() {return login;}
+    public boolean isUserExist(String username) {return isAccountExist;}
 
     private static class InsertCourseAsyncTask extends AsyncTask<Account, Void, Void> {
         private AccountDao accountDao;

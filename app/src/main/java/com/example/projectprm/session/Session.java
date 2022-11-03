@@ -1,4 +1,4 @@
-package com.example.projectprm;
+package com.example.projectprm.session;
 
 import android.content.Context;
 import android.content.SharedPreferences;

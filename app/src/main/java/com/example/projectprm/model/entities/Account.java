@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity(tableName = "Account", indices = {@Index(value = {"username"},unique = true)})
 public class Account {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "acc_id")
     private int accountId;
@@ -61,6 +61,12 @@ public class Account {
         this.address = address;
         this.type = type;
         this.createdDate = createdDate;
+    }
+
+    public Account(@NonNull String username, @NonNull String password, @NonNull String type) {
+        this.username = username;
+        this.password = password;
+        this.type = type;
     }
 
     public int getAccountId() {

@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectprm.R;
-import com.example.projectprm.Session;
+import com.example.projectprm.session.Session;
 import com.example.projectprm.model.entities.Account;
 import com.example.projectprm.model.repos.AccountRepository;
 
@@ -50,6 +50,10 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "Username or Password not valid!", Toast.LENGTH_SHORT).show();
         }
+    }
 
+    public void Register(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 }
