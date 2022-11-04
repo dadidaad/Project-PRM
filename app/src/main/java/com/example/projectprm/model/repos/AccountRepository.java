@@ -17,6 +17,10 @@ public class AccountRepository {
     private Account login;
     private boolean isAccountExist;
 
+    public AccountRepository(Application application){
+        AccountDatabase accountDatabase = AccountDatabase.getINSTANCE(application);
+        accountDao = accountDatabase.accountDao();
+    }
     public AccountRepository(Application application, String username) {
         AccountDatabase accountDatabase = AccountDatabase.getINSTANCE(application);
         accountDao = accountDatabase.accountDao();
@@ -51,6 +55,7 @@ public class AccountRepository {
     }
 
     public Account login() {return login;}
+    public Account getById(int accId){return accountDao.getById(accId);}
     public boolean isUserExist(String username) {return isAccountExist;}
 
     private static class InsertCourseAsyncTask extends AsyncTask<Account, Void, Void> {
