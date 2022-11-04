@@ -22,19 +22,21 @@ public class NewestBookAdapter extends RecyclerView.Adapter<NewestBookAdapter.Ne
     List<Book> books;
     List<Price> prices;
     private final OnClickItemRecyclerView onClickItemRecyclerView;
+    String tag;
 
-    public NewestBookAdapter(Context context, List<Book> books, List<Price> prices, OnClickItemRecyclerView onClickItemRecyclerView) {
+    public NewestBookAdapter(Context context, List<Book> books, List<Price> prices, OnClickItemRecyclerView onClickItemRecyclerView, String tag) {
         this.context = context;
         this.books = books;
         this.prices = prices;
         this.onClickItemRecyclerView = onClickItemRecyclerView;
+        this.tag = tag;
     }
 
     @NonNull
     @Override
     public NewestBookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.newest_book_item, parent, false);
-        return new NewestBookAdapter.NewestBookViewHolder(view, onClickItemRecyclerView);
+        return new NewestBookAdapter.NewestBookViewHolder(view, onClickItemRecyclerView, tag);
     }
 
     @Override
@@ -59,7 +61,7 @@ public class NewestBookAdapter extends RecyclerView.Adapter<NewestBookAdapter.Ne
         ImageView bookImage;
         TextView bookName, bookPrice;
         //Button addToCart;
-        public NewestBookViewHolder(@NonNull View itemView, OnClickItemRecyclerView onClickItemRecyclerView) {
+        public NewestBookViewHolder(@NonNull View itemView, OnClickItemRecyclerView onClickItemRecyclerView, String tag) {
             super(itemView);
             bookImage = itemView.findViewById(R.id.bookImage);
             bookName = itemView.findViewById(R.id.bookName);
@@ -72,7 +74,7 @@ public class NewestBookAdapter extends RecyclerView.Adapter<NewestBookAdapter.Ne
                     if(onClickItemRecyclerView != null){
                         int pos = getAdapterPosition();
                         if(pos != RecyclerView.NO_POSITION){
-                            onClickItemRecyclerView.onItemClick(pos, "viewDetail");
+                            onClickItemRecyclerView.onItemClick(pos, tag);
                         }
                     }
                 }

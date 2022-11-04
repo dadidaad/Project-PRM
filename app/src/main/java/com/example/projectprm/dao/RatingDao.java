@@ -23,4 +23,7 @@ public interface RatingDao {
 
     @Query("SELECT * FROM Rating")
     public List<Rating> getAll();
+
+    @Query ("SELECT * from RATING where book_id = :bookId")
+    public List<Rating> getByBookId(int bookId);
 }

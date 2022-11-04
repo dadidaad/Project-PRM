@@ -3,6 +3,7 @@ package com.example.projectprm.view.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -41,6 +42,8 @@ public class BookDetailActivity extends AppCompatActivity {
     TextView txtBookAuthor;
     TextView txtDescription;
 
+    Button btn_cmt_rate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,12 +76,20 @@ public class BookDetailActivity extends AppCompatActivity {
         txtBookDetailName.setText(book.getBookName());
         txtBookDetailStar.setText(book.getAvgStars().toString());
         txtBookDetailPrice.setText(String.valueOf(new PriceRepository(this.getApplication()).getPriceBookID(bookId).getPrice()) + "đ");
-        txtBookDetailUnitInStock.setText(String.valueOf(book.getUnitInStock()) + "Books Left");
+        txtBookDetailUnitInStock.setText(String.valueOf(book.getUnitInStock()) + " Books Left");
         txtBookDetailID.setText(String.valueOf(book.getBookID()));
         txtBookRelease.setText(book.getAddDate().toString());
         txtBookAuthor.setText(new AuthorRepository(this.getApplication()).getAuthorById(book.getAuthorID()).getAuthorName());
         txtDescription.setText(book.getDescription());
 
+        //Open Comment and Rating
+        btn_cmt_rate = findViewById(R.id.btn_cmt_rate);
+        btn_cmt_rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCommentView(bookId);
+            }
+        });
 
         btnOpenDialogWhish = findViewById(R.id.btn_dialogWhish);
 
@@ -126,5 +137,12 @@ public class BookDetailActivity extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+
+    public void openCommentView(int bookId){
+        Intent intent = new Intent(this, ViewCommentActivity.class);
+        intent.putExtra("bookId", bookId);
+
+        startActivity(intent);
     }
 }

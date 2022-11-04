@@ -177,7 +177,7 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         newestBookListRec.setLayoutManager(layoutManager);
 
-        newestBookAdapter = new NewestBookAdapter(this.getContext(), newestBookList, priceList, this);
+        newestBookAdapter = new NewestBookAdapter(this.getContext(), newestBookList, priceList, this, "newest");
         newestBookListRec.setAdapter(newestBookAdapter);
     }
 
@@ -185,7 +185,7 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         highestRateRec.setLayoutManager(layoutManager);
 
-        highestBookAdapter = new NewestBookAdapter(this.getContext(), bookList, priceList, this);
+        highestBookAdapter = new NewestBookAdapter(this.getContext(), bookList, priceList, this, "highest");
         highestRateRec.setAdapter(highestBookAdapter);
     }
 
@@ -205,7 +205,7 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
                 }
             }
         }
-        bestSellingBookAdapter = new NewestBookAdapter(this.getContext(), filterBestSellingBook, priceList, this);
+        bestSellingBookAdapter = new NewestBookAdapter(this.getContext(), filterBestSellingBook, priceList, this, "bestSell");
         bestSellingRec.setAdapter(bestSellingBookAdapter);
     }
     public void initListBook(String tag){
@@ -221,10 +221,22 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
             intent.putExtra("CatID", categoryList.get(position).getCategoryId());
 
             startActivity(intent);
-        }else if(tag == "viewDetail"){
+        }else if(tag == "newest"){
             Intent intent = new Intent(this.getContext(), BookDetailActivity.class);
 
             intent.putExtra("bookId", newestBookList.get(position).getBookID());
+
+            startActivity(intent);
+        }else if(tag == "highest"){
+            Intent intent = new Intent(this.getContext(), BookDetailActivity.class);
+
+            intent.putExtra("bookId", highestRateBookList.get(position).getBookID());
+
+            startActivity(intent);
+        }else if(tag == "bestSell"){
+            Intent intent = new Intent(this.getContext(), BookDetailActivity.class);
+
+            intent.putExtra("bookId", bestSellingBookList.get(position).getBookID());
 
             startActivity(intent);
         }
