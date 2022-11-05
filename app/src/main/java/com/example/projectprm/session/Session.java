@@ -2,13 +2,21 @@ package com.example.projectprm.session;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import com.example.projectprm.model.entities.Account;
+import com.example.projectprm.model.entities.Price;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Session {
 
@@ -16,7 +24,48 @@ public class Session {
 
     public Session(Context cntx) {
         // TODO Auto-generated constructor stub
-        prefs = PreferenceManager.getDefaultSharedPreferences(cntx);
+        prefs = cntx.getSharedPreferences(cntx.getPackageName(), Context.MODE_PRIVATE);
+    }
+
+    public Map<Integer, Integer> getCart() {
+        Gson gson = new Gson();
+        String json = prefs.getString("cart", null);
+        Type type = new TypeToken<Map<Integer, Integer>>() {
+        }.getType();
+        return gson.fromJson(json, type) == null ? new HashMap<>() : gson.fromJson(json, type);
+    }
+
+    public List<Price> getHistoryPrice() {
+        Gson gson = new Gson();
+        String json = prefs.getString("cart_history_price", null);
+        Type type = new TypeToken<List<Price>>() {
+        }.getType();
+        return gson.fromJson(json, type) == null ? new ArrayList<>() : gson.fromJson(json, type);
+    }
+
+    public int getTotalQuantity() {
+        Gson gson = new Gson();
+        String json = prefs.getString("cart_total_quantity", null);
+        Type type = new TypeToken<Integer>() {
+        }.getType();
+        return gson.fromJson(json, type) == null ? 0 : gson.fromJson(json, type);
+    }
+
+    public BigInteger getTotalPrice() {
+        Gson gson = new Gson();
+        String json = prefs.getString("cart_total_price", null);
+        Type type = new TypeToken<BigInteger>() {
+        }.getType();
+        return gson.fromJson(json, type) == null ? BigInteger.ZERO : gson.fromJson(json, type);
+    }
+
+    public void saveCart(Map<Integer, Integer> cart, int totalQuantity, BigInteger totalPrice, List<Price> historyPrice) {
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        editor.putString("cart", gson.toJson(cart));
+        editor.putString("cart_total_quantity", gson.toJson(totalQuantity));
+        editor.putString("cart_total_price", gson.toJson(totalPrice));
+        editor.putString("cart_history_price", gson.toJson(historyPrice));
     }
 
     public void setAccount(Account account) {

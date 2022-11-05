@@ -37,6 +37,9 @@ public class AuthorRepository {
         new AuthorRepository.DeleteCourseAsyncTask(authorDao).execute(model);
     }
 
+    public Author get(int id){
+        return authorDao.get(id);
+    }
     public List<Author> getAll() {
         return authors;
     }

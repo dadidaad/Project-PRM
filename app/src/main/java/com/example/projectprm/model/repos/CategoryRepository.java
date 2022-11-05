@@ -3,12 +3,9 @@ package com.example.projectprm.model.repos;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.projectprm.dao.CategoryDao;
 import com.example.projectprm.dao.room.CategoryDatabase;
 import com.example.projectprm.model.entities.Category;
-import com.example.projectprm.view.fragment.HomeFragment;
 
 import java.util.List;
 
@@ -42,6 +39,10 @@ public class CategoryRepository {
     // below method is to read all the courses.
     public List<Category> getAll() {
         return allCategory;
+    }
+
+    public Category get(int id) {
+        return categoryDao.get(id);
     }
 
     private static class InsertCourseAsyncTask extends AsyncTask<Category, Void, Void> {

@@ -33,4 +33,11 @@ public interface PriceDAO {
 
     @Query("Select * from Price where book_id = :bookId and to_date is null")
     public Price getByBookID(int bookId);
+
+    @Query("SELECT DISTINCT *\n" +
+            "FROM Price\n" +
+            "WHERE book_id = :bookId  \n" +
+            "ORDER BY from_date DESC\n" +
+            "LIMIT 1 OFFSET 1 ")
+    public Price getBeforePriceOfBook(int bookId);
 }

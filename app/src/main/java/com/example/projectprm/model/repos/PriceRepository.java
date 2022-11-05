@@ -3,11 +3,8 @@ package com.example.projectprm.model.repos;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import com.example.projectprm.dao.CategoryDao;
 import com.example.projectprm.dao.PriceDAO;
-import com.example.projectprm.dao.room.CategoryDatabase;
 import com.example.projectprm.dao.room.PriceDatabase;
-import com.example.projectprm.model.entities.Category;
 import com.example.projectprm.model.entities.Price;
 
 import java.util.List;
@@ -25,6 +22,7 @@ public class PriceRepository {
         allPrice = priceDAO.getAll();
         allPriceOrder = priceDAO.getOrderByPrice();
     }
+
     public void insert(Price model) {
         new PriceRepository.InsertCourseAsyncTask(priceDAO).execute(model);
     }
@@ -38,13 +36,23 @@ public class PriceRepository {
     public void delete(Price model) {
         new PriceRepository.DeleteCourseAsyncTask(priceDAO).execute(model);
     }
+
     public List<Price> getAll() {
         return allPrice;
     }
+
     public List<Price> getAllPriceOrder() {
         return allPriceOrder;
     }
-    public Price getPriceBookID(int bookId){return priceDAO.getByBookID(bookId);}
+
+    public Price getPriceBookID(int bookId) {
+        return priceDAO.getByBookID(bookId);
+    }
+
+    public Price getBeforePriceOfBook(int bookId) {
+        return priceDAO.getBeforePriceOfBook(bookId);
+    }
+
     private static class InsertCourseAsyncTask extends AsyncTask<Price, Void, Void> {
         private PriceDAO priceDAO;
 

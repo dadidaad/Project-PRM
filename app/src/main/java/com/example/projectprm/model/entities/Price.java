@@ -82,4 +82,12 @@ public class Price {
     public void setBookID(int bookID) {
         this.bookID = bookID;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Price that = (Price) o;
+        return priceID == that.getPriceID();
+    }
 }

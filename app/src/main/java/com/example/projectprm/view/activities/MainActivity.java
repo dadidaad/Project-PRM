@@ -6,21 +6,30 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.projectprm.R;
+import com.example.projectprm.utils.CartHelper;
 import com.example.projectprm.view.adapter.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    static Button cartCount;
+    static int mCartCount = 0;
     private ViewPager mViewPager;
     private BottomNavigationView mBottomNavigationView;
+    CartHelper cartHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        cartHelper = new CartHelper(getApplication());
         mViewPager = findViewById(R.id.viewPager);
         mBottomNavigationView = findViewById(R.id.bottonNav);
 
@@ -57,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+        mBottomNavigationView.getOrCreateBadge(R.id.cartFragment).setNumber(cartHelper.getTotalQuantity());
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -79,4 +88,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_botton_nav, menu);
+        View count = menu.findItem(R.id.cartFragment).getActionView();
+        cartCount = (Button) findViewById(R.id.notif_count);
+        cartCount.setText(String.valueOf(mCartCount));
+        return super.onCreateOptionsMenu(menu);
+    }*/
 }

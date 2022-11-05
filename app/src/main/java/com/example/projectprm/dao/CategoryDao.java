@@ -27,5 +27,5 @@ public interface CategoryDao {
     public List<Category> getAll();
 
     @Query("SELECT * FROM Category WHERE cat_id = :categoryId")
-    public List<Category> get(int categoryId);
+    public Category get(int categoryId);
 }

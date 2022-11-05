@@ -44,6 +44,7 @@ public class BookDetailActivity extends AppCompatActivity {
 
     Button btn_cmt_rate;
 
+    Button btn_add_to_cart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +98,13 @@ public class BookDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openDialogWhish(Gravity.CENTER);
+            }
+        });
+        btn_add_to_cart = findViewById(R.id.btn_add_to_cart);
+        btn_add_to_cart.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
             }
         });
     }
