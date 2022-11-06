@@ -1,6 +1,7 @@
 package com.example.projectprm.view.fragment;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.projectprm.R;
 import com.example.projectprm.model.entities.Book;
@@ -72,6 +76,9 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
     TextView txtNewest;
     TextView txtHighestRating;
     TextView txtBestSelling;
+
+    ImageView imgSearchIcon;
+    EditText edtSearchHome;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -109,6 +116,31 @@ public class HomeFragment extends Fragment implements OnClickItemRecyclerView {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        imgSearchIcon = view.findViewById(R.id.imgSearchIcon);
+        edtSearchHome = view.findViewById(R.id.edtSearchHome);
+        imgSearchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checkExist = false;
+                List<Book> containBooks = new BookRepository(HomeFragment.this.getActivity().getApplication()).getAll();
+                for (Book b : containBooks){
+                    if(b.getBookName().contains(edtSearchHome.getText().toString().trim())){
+                        checkExist=true;
+                        break;
+                    }
+                }
+                if(checkExist) {
+                    Intent intent = new Intent(HomeFragment.this.getContext(), ListBookActivity.class);
+                    intent.putExtra("tag", "contain");
+                    intent.putExtra("searchText", edtSearchHome.getText().toString().trim());
+
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(HomeFragment.this.getContext(), "Can not find this book", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
         //Get Category Recycler View and Init Data
         categoriesListRec = view.findViewById(R.id.categoryRecycler);
         categoryList = new CategoryRepository(this.getActivity().getApplication()).getAll();

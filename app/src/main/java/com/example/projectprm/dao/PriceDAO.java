@@ -31,6 +31,9 @@ public interface PriceDAO {
     @Query("SELECT * FROM Price Order by price")
     public List<Price> getOrderByPrice();
 
+    @Query("SELECT * FROM Price Order by price DESC")
+    public List<Price> getOrderByPriceDesc();
+
     @Query("Select * from Price where book_id = :bookId and to_date is null")
     public Price getByBookID(int bookId);
 
