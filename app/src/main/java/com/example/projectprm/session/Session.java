@@ -69,6 +69,7 @@ public class Session {
     }
 
     public void setAccount(Account account) {
+        prefs.edit().putInt("acc_id", account.getAccountId()).commit();
         prefs.edit().putString("username", account.getUsername()).commit();
         prefs.edit().putString("password", account.getPassword()).commit();
         Date dateOfBirth = account.getDateOfBirth();
@@ -84,6 +85,7 @@ public class Session {
     }
 
     public Account getAccount() {
+        int acc_id = prefs.getInt("acc_id", 0);
         String username = prefs.getString("username", "");
         String password = prefs.getString("password", "");
         String dob = prefs.getString("dob", "");
@@ -97,6 +99,6 @@ public class Session {
         String address = prefs.getString("address", "");
         String type = prefs.getString("type", "");
 
-        return new Account(username, password, dateOfBirth, dispName, address, type);
+        return new Account(acc_id, username, password, dateOfBirth, dispName, address, type);
     }
 }
