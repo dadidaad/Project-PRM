@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.projectprm.R;
@@ -29,6 +30,7 @@ public class ViewCommentActivity extends AppCompatActivity {
     TextView txtReviewTotal;
     RecyclerView reviewListRec;
     ReviewListAdapter reviewListAdapter;
+    ImageView btnReviewBack;
 
     private List<Rating> ratingList;
     private List<Account> accountList;
@@ -49,6 +51,19 @@ public class ViewCommentActivity extends AppCompatActivity {
 
         txtBookReviewName.setText(book.getBookName());
         txtCreateComment = findViewById(R.id.txtCreateComment);
+
+        btnReviewBack = findViewById(R.id.btnReviewBack);
+
+        btnReviewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewCommentActivity.this, BookDetailActivity.class);
+
+                intent.putExtra("bookId", bookId);
+
+                startActivity(intent);
+            }
+        });
 
         ratingList = new RatingRepository(this.getApplication()).getRatingsBook(book.getBookID());
 

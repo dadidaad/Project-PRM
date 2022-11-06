@@ -1,5 +1,7 @@
 package com.example.projectprm.view.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +9,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.projectprm.R;
+import com.example.projectprm.model.entities.Account;
+import com.example.projectprm.session.Session;
+import com.example.projectprm.view.activities.ChangePasswordActivity;
+import com.example.projectprm.view.activities.EditProfileActivity;
+import com.example.projectprm.view.activities.ListBookActivity;
+import com.example.projectprm.view.activities.RegisterActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +36,9 @@ public class ProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private TextView txtUserName;
+    private Button buttonUpdateProfile, buttonChangePassword;
+    private EditText editTextFullName, editTextDOB, editTextAddress;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -61,6 +75,65 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        txtUserName = view.findViewById(R.id.txtUserName);
+        editTextFullName = view.findViewById(R.id.editTextFullName);
+        editTextDOB = view.findViewById(R.id.editTextDOB);
+        editTextAddress = view.findViewById(R.id.editTextAddress);
+        buttonUpdateProfile = view.findViewById(R.id.buttonUpdateProfile);
+        buttonChangePassword = view.findViewById(R.id.buttonChangePassword);
+
+        Account acc = new Session(getActivity()).getAccount();
+        txtUserName.setText(acc.getUsername());
+        if (acc.getDateOfBirth() != null) {
+            editTextDOB.setText(acc.getDateOfBirth().toString());
+        }
+        if (acc.getAddress() != null) {
+            editTextAddress.setText(acc.getAddress());
+        }
+        if (acc.getDisplayName() != null) {
+            editTextFullName.setText(acc.getDisplayName());
+        }
+
+        buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (buttonUpdateProfile.getText().toString().matches("edit profile")) {
+                    editTextFullName.setEnabled(true);
+                    editTextDOB.setEnabled(true);
+                    editTextAddress.setEnabled(true);
+                    buttonUpdateProfile.setText("save");
+                } else {
+                    editTextFullName.setEnabled(false);
+                    editTextDOB.setEnabled(false);
+                    editTextAddress.setEnabled(false);
+                    buttonUpdateProfile.setText("edit profile");
+                    updateProfile(editTextFullName.getText().toString(),
+                            editTextDOB.getText().toString(),
+                            editTextAddress.getText().toString());
+                }
+            }
+        });
+
+        buttonChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changePassword();
+            }
+        });
+        return view;
+    }
+
+    public void updateProfile(String fullName, String dob, String address){
+        Intent intent = new Intent(this.getContext(), EditProfileActivity.class);
+        intent.putExtra("fullName", fullName);
+        intent.putExtra("dob", dob);
+        intent.putExtra("address", address);
+        startActivity(intent);
+    }
+
+    public void changePassword() {
+        Intent intent = new Intent(this.getContext(), ChangePasswordActivity.class);
+        startActivity(intent);
     }
 }

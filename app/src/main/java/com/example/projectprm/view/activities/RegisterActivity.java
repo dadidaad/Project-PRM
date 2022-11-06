@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Username existed! Please use another username", Toast.LENGTH_SHORT).show();
             return;
         } else {
-            AccountRepository ar1 = new AccountRepository(getApplication(), username, password, "Customer");
+            AccountRepository ar1 = new AccountRepository(getApplication(), username, password, "Customer", 1);
             Toast.makeText(this, "Successfully!", Toast.LENGTH_SHORT).show();
             Login(view);
         }

@@ -8,6 +8,7 @@ import androidx.room.Update;
 
 import com.example.projectprm.model.entities.Account;
 
+import java.util.Date;
 import java.util.List;
 
 @Dao
@@ -30,8 +31,14 @@ public interface AccountDao {
     @Query("SELECT * FROM `Account` WHERE username = :username AND password = :password")
     public Account login(String username, String password);
 
+    @Query("SELECT dob  FROM `Account` WHERE username = :username AND password = :password")
+    public Date isDobNull(String username, String password);
+
     @Query("SELECT * FROM `Account` WHERE username = :username")
     public boolean isUserExist(String username);
+
+    @Query("UPDATE `Account` SET password = :password WHERE acc_id = :acc_id")
+    public int changePassword(String password, int acc_id);
 /*
     @Query("INSERT INTO Account (username, password, dob, disp_name, address, type, created_date)\n" +
             "VALUES (:username, :password, '', '', '', 'Customer', '')")

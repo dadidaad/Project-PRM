@@ -44,6 +44,9 @@ public class PriceRepository {
     public List<Price> getAllPriceOrder() {
         return allPriceOrder;
     }
+    public List<Price> getAllPriceOrderDesc() {
+        return priceDAO.getOrderByPriceDesc();
+    }
 
     public Price getPriceBookID(int bookId) {
         return priceDAO.getByBookID(bookId);

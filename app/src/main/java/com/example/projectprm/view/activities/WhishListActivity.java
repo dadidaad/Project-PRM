@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +35,8 @@ public class WhishListActivity extends AppCompatActivity implements OnClickItemR
     TextView txtNumberWhishBook;
     List<WhishList> whishLists;
     SearchView searchView;
+
+    ImageView btnWishListBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,15 @@ public class WhishListActivity extends AppCompatActivity implements OnClickItemR
         listWhishBookRec = findViewById(R.id.listWishBookRec);
         searchView = findViewById(R.id.searchView);
         txtNumberWhishBook = findViewById(R.id.txtNumberOfWishBook);
+        btnWishListBack = findViewById(R.id.btnWishListBack);
+
+        btnWishListBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WhishListActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         whishLists = new WhishListRepository(getApplication()).getByAcc(new Session(this).getAccount().getAccountId());
 
