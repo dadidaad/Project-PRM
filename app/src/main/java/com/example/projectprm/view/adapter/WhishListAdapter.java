@@ -25,18 +25,25 @@ public class WhishListAdapter extends RecyclerView.Adapter<WhishListAdapter.Whis
     Context context;
     Application application;
     List<WhishList> whishLists;
+    private final OnClickItemRecyclerView onClickItemRecyclerView;
 
-    public WhishListAdapter(Context context, List<WhishList> whishLists, Application application) {
+    public WhishListAdapter(Context context, List<WhishList> whishLists, Application application, OnClickItemRecyclerView onClickItemRecyclerView) {
         this.context = context;
         this.whishLists = whishLists;
         this.application = application;
+        this.onClickItemRecyclerView = onClickItemRecyclerView;
+    }
+
+    public void setWhishList(List<WhishList> filterWhishList){
+        this.whishLists = filterWhishList;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public WhishListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.whishlist_item, parent, false);
-        return new WhishListAdapter.WhishListViewHolder(view);
+        return new WhishListAdapter.WhishListViewHolder(view, onClickItemRecyclerView);
     }
 
     @Override
@@ -47,7 +54,7 @@ public class WhishListAdapter extends RecyclerView.Adapter<WhishListAdapter.Whis
         int resid = new PathConverter().GetResource(context,book.getImage());
         holder.whishListBookImage.setImageResource(resid);
         holder.whishListBookName.setText(book.getBookName());
-        holder.whishListBookPrice.setText(price.getPrice());
+        holder.whishListBookPrice.setText(String.valueOf(price.getPrice()));
     }
 
     @Override
@@ -59,11 +66,25 @@ public class WhishListAdapter extends RecyclerView.Adapter<WhishListAdapter.Whis
         ImageView whishListBookImage;
         TextView whishListBookName;
         TextView whishListBookPrice;
-        public WhishListViewHolder(@NonNull View itemView) {
+        public WhishListViewHolder(@NonNull View itemView, OnClickItemRecyclerView onClickItemRecyclerView) {
             super(itemView);
             whishListBookImage = itemView.findViewById(R.id.bookImage);
             whishListBookName = itemView.findViewById(R.id.bookName);
             whishListBookPrice = itemView.findViewById(R.id.bookPrice);
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    if(onClickItemRecyclerView != null){
+                        int pos = getAdapterPosition();
+                        if(pos != RecyclerView.NO_POSITION){
+                            onClickItemRecyclerView.onItemClick(pos, "wishDetail");
+                        }
+                    }
+                }
+
+            });
         }
     }
 }

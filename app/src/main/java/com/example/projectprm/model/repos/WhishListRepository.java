@@ -21,6 +21,7 @@ public class WhishListRepository {
     }
 
     public List<WhishList> getByAcc(int accId){return whishListDao.get(accId);}
+    public WhishList getByAccIdBookId(int accId, int bookId){return whishListDao.getByAccIdBookId(accId, bookId);}
     public void insert(WhishList model) {
         new WhishListRepository.InsertCourseAsyncTask(whishListDao).execute(model);
     }

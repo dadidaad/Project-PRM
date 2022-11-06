@@ -23,9 +23,12 @@ import com.example.projectprm.R;
 import com.example.projectprm.dao.PriceDAO;
 import com.example.projectprm.model.entities.Book;
 import com.example.projectprm.model.entities.Price;
+import com.example.projectprm.model.entities.WhishList;
 import com.example.projectprm.model.repos.AuthorRepository;
 import com.example.projectprm.model.repos.BookRepository;
 import com.example.projectprm.model.repos.PriceRepository;
+import com.example.projectprm.model.repos.WhishListRepository;
+import com.example.projectprm.session.Session;
 import com.example.projectprm.utils.CartHelper;
 import com.example.projectprm.utils.converters.PathConverter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -148,6 +151,14 @@ public class BookDetailActivity extends AppCompatActivity {
         addWhish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                WhishList whishList = new WhishList();
+                whishList.setAccId(new Session(getApplication()).getAccount().getAccountId());
+                whishList.setBookId(bookId);
+                whishList.setDesc(editText.getText().toString());
+
+                new WhishListRepository(getApplication()).insert(whishList);
+
                 Intent intent = new Intent(BookDetailActivity.this, WhishListActivity.class);
                 intent.putExtra("bookId", bookId);
                 startActivity(intent);
