@@ -27,4 +27,7 @@ public interface WhishListDao {
 
     @Query("SELECT * FROM WhishList WHERE acc_Id = :accId")
     public List<WhishList> get(int accId);
+
+    @Query("SELECT * FROM WhishList WHERE acc_Id = :accId and book_id =:bookId")
+    public WhishList getByAccIdBookId(int accId, int bookId);
 }

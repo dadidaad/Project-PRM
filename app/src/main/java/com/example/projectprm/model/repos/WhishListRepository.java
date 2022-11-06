@@ -10,6 +10,8 @@ import com.example.projectprm.dao.room.WhishListDatabase;
 import com.example.projectprm.model.entities.Category;
 import com.example.projectprm.model.entities.WhishList;
 
+import java.util.List;
+
 public class WhishListRepository {
     private WhishListDao whishListDao;
 
@@ -18,6 +20,8 @@ public class WhishListRepository {
         whishListDao = whishListDatabase.whishListDao();
     }
 
+    public List<WhishList> getByAcc(int accId){return whishListDao.get(accId);}
+    public WhishList getByAccIdBookId(int accId, int bookId){return whishListDao.getByAccIdBookId(accId, bookId);}
     public void insert(WhishList model) {
         new WhishListRepository.InsertCourseAsyncTask(whishListDao).execute(model);
     }
