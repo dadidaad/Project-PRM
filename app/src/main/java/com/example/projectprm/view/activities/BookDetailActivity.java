@@ -50,6 +50,8 @@ public class BookDetailActivity extends AppCompatActivity {
     Button btn_cmt_rate;
     CartHelper cartHelper;
     Button btn_add_to_cart;
+    Button btn_add_quantity_to_cart, btn_minus_quantity_to_cart;
+    TextView textViewQuantityToCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +90,9 @@ public class BookDetailActivity extends AppCompatActivity {
         txtBookAuthor.setText(new AuthorRepository(this.getApplication()).getAuthorById(book.getAuthorID()).getAuthorName());
         txtDescription.setText(book.getDescription());
 
+        btn_add_quantity_to_cart = findViewById(R.id.btn_add_item_to_cart);
+        btn_minus_quantity_to_cart = findViewById(R.id.btn_minus_item_to_cart);
+        textViewQuantityToCart = findViewById(R.id.textViewQuantityToCart);
         //Open Comment and Rating
         btn_cmt_rate = findViewById(R.id.btn_cmt_rate);
         btn_cmt_rate.setOnClickListener(new View.OnClickListener() {
@@ -105,12 +110,37 @@ public class BookDetailActivity extends AppCompatActivity {
                 openDialogWhish(Gravity.CENTER);
             }
         });
+        btn_minus_quantity_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = Integer.parseInt(textViewQuantityToCart.getText().toString().trim());
+                if(quantity == 1){
+                    Toast.makeText(BookDetailActivity.this, "Can not least than 1", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                --quantity;
+                textViewQuantityToCart.setText(String.valueOf(quantity));
+            }
+        });
+        btn_add_quantity_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = Integer.parseInt(textViewQuantityToCart.getText().toString().trim());
+                if(quantity == book.getUnitInStock()){
+                    Toast.makeText(BookDetailActivity.this, "Can not more than than units in stock", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                ++quantity;
+                textViewQuantityToCart.setText(String.valueOf(quantity));
+            }
+        });
         cartHelper = new CartHelper(getApplication());
         btn_add_to_cart = findViewById(R.id.btn_add_to_cart);
         btn_add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addToCart(bookId);
+                int quantity = Integer.parseInt(textViewQuantityToCart.getText().toString().trim());
+                addToCart(bookId, quantity);
             }
         });
     }
@@ -153,10 +183,10 @@ public class BookDetailActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void addToCart(int bookId) {
+    public void addToCart(int bookId, int quantity) {
         PriceRepository priceRepository = new PriceRepository(getApplication());
         Price lastPriceOfBook = priceRepository.getPriceBookID(bookId);
-        cartHelper.add(bookId, 1, lastPriceOfBook);
+        cartHelper.add(bookId, quantity, lastPriceOfBook);
         Toast.makeText(this, "Add to cart successfully", Toast.LENGTH_SHORT).show();
     }
 

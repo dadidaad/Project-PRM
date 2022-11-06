@@ -92,7 +92,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txtBookDetailPrice" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -100,37 +100,39 @@
             android:background="#c2d7fc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtBookDetailPrice">
+            app:layout_constraintTop_toBottomOf="@+id/txtBookDetailPrice"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btn_minus_item_to_cart"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:text="+"
-                android:textSize="32sp"
+                android:layout_marginStart="20dp"
+                android:text="-"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/textViewQuantityToCart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:text="1"
                 android:textSize="26sp"
+                android:inputType="number"
                 app:layout_constraintBottom_toBottomOf="@+id/textView16"
                 app:layout_constraintStart_toEndOf="@+id/textView16"
                 app:layout_constraintTop_toTopOf="@+id/textView16" />
 
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btn_add_item_to_cart"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="19dp"
-                android:text="-"
-                android:textSize="32sp"
+                android:layout_marginStart="20dp"
+                android:text="+"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView16"
                 app:layout_constraintStart_toEndOf="@+id/textView17"
                 app:layout_constraintTop_toTopOf="@+id/textView16" />
@@ -139,7 +141,7 @@
                 android:id="@+id/btn_add_to_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="3dp"
+                android:layout_marginLeft="50dp"
                 android:backgroundTint="#fcfcfc"
                 android:text="Add to Cart"
                 android:textColor="#fa0202"
@@ -147,19 +149,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/button3"
                 app:layout_constraintTop_toTopOf="@+id/button3" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:backgroundTint="#fa0202"
-                android:text="Buy Now"
-                app:icon="@drawable/ic_baseline_shopping_cart_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView19"

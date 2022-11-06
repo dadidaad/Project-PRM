@@ -88,12 +88,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_botton_nav, menu);
-        View count = menu.findItem(R.id.cartFragment).getActionView();
-        cartCount = (Button) findViewById(R.id.notif_count);
-        cartCount.setText(String.valueOf(mCartCount));
-        return super.onCreateOptionsMenu(menu);
-    }*/
+
+    public void updateBadge(int totalQuantity){
+        mBottomNavigationView.getOrCreateBadge(R.id.cartFragment).setNumber(totalQuantity);
+    }
 }

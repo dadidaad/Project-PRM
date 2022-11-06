@@ -30,7 +30,10 @@
             android:exported="false" />
         <activity
             android:name=".view.activities.BookDetailActivity"
-            android:exported="false" />
+            android:exported="false">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.activities.MainActivity"></meta-data>
+        </activity>
         <activity
             android:name=".view.activities.ListBookActivity"
             android:exported="false" />

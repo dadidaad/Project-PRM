@@ -29,6 +29,14 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
+        <Button
+            android:id="@+id/btn_clear_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear cart">
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"</Button>
+
         <LinearLayout
             android:id="@+id/ll_item"
             android:layout_width="fill_parent"
@@ -36,8 +44,6 @@
             android:background="@color/primary_color"
             android:gravity="bottom|end"
             >
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="fill_parent"
                 android:layout_height="60dp"

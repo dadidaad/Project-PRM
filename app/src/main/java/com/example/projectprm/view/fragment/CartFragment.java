@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import com.example.projectprm.exceptions.BookNotFoundException;
 import com.example.projectprm.exceptions.QuantityOutOfRangeException;
 import com.example.projectprm.model.CartItem;
 import com.example.projectprm.utils.CartHelper;
+import com.example.projectprm.view.activities.MainActivity;
 import com.example.projectprm.view.adapter.CartItemAdapter;
 
 import java.util.List;
@@ -42,6 +44,7 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartItem
     List<CartItem> cartItems;
     TextView totalPrice, totalQuantity;
     CartItemAdapter cartItemAdapter;
+    Button btnClearAll;
     public CartFragment() {
         // Required empty public constructor
     }
@@ -102,6 +105,14 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartItem
             listCartItem.setVisibility(View.VISIBLE);
             infoCart.setVisibility(View.VISIBLE);
         }
+        btnClearAll = view.findViewById(R.id.btn_clear_all);
+        btnClearAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cartHelper.clear();
+                updateCart();
+            }
+        });
         return view;
     }
 
@@ -110,9 +121,7 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartItem
         CartItem cartItem = cartItems.get(position);
         try {
             cartHelper.remove(cartItem.getBook().getBookID(),  1, cartItem.getNewPrice());
-            cartItemAdapter.notifyItemChanged(position);
-            totalQuantity.setText(String.valueOf(cartHelper.getTotalQuantity()));
-            totalPrice.setText(cartHelper.getTotalPrice().toString());
+            updateCart();
         } catch (BookNotFoundException ex) {
             Toast.makeText(this.getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
         } catch (QuantityOutOfRangeException ex) {
@@ -124,10 +133,8 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartItem
     public void onQuantityIncreased(int position) {
         CartItem cartItem = cartItems.get(position);
         try {
-            cartHelper.update(cartItem.getBook().getBookID(),1, cartItem.getNewPrice());
-            cartItemAdapter.notifyItemChanged(position);
-            totalQuantity.setText(String.valueOf(cartHelper.getTotalQuantity()));
-            totalPrice.setText(cartHelper.getTotalPrice().toString());
+            cartHelper.add(cartItem.getBook().getBookID(),1, cartItem.getNewPrice());
+            updateCart();
         } catch (BookNotFoundException ex) {
             Toast.makeText(this.getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
         } catch (QuantityOutOfRangeException ex) {
@@ -140,13 +147,22 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartItem
         CartItem cartItem = cartItems.get(position);
         try {
             cartHelper.remove(cartItem.getBook().getBookID());
-            cartItemAdapter.notifyItemChanged(position);
-            totalQuantity.setText(String.valueOf(cartHelper.getTotalQuantity()));
-            totalPrice.setText(cartHelper.getTotalPrice().toString());
+            updateCart();
         } catch (BookNotFoundException ex) {
             Toast.makeText(this.getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
         } catch (QuantityOutOfRangeException ex) {
             Toast.makeText(this.getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void updateCart(){
+        cartItems = cartHelper.convertFromMapToList();
+        cartItemAdapter.setCartItems(cartItems);
+        totalQuantity.setText(String.valueOf(cartHelper.getTotalQuantity()));
+        totalPrice.setText(cartHelper.getTotalPrice().toString());
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.updateBadge(cartHelper.getTotalQuantity());
+    }
+
+
 }
