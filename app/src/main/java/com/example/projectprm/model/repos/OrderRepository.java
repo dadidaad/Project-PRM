@@ -17,6 +17,7 @@ public class OrderRepository {
 
     public OrderRepository(Application application) {
         OrderDatabase orderDatabase = OrderDatabase.getINSTANCE(application);
+        orderDAO = orderDatabase.OrderDAO();
     }
     public void insert(Order model) {
         new OrderRepository.InsertCourseAsyncTask(orderDAO).execute(model);
@@ -33,7 +34,7 @@ public class OrderRepository {
     }
 
     public List<Order> getAll() {return orderDAO.getAll();}
-    public List<Order> getById(int orderId) {return orderDAO.getById(orderId);}
+    public Order getById(int orderId) {return orderDAO.getById(orderId);}
 
     private static class InsertCourseAsyncTask extends AsyncTask<Order, Void, Void> {
         private OrderDao orderDao;

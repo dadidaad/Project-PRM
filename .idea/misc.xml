@@ -10,7 +10,7 @@
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/drawable/bg_yellow_corner_top.xml" value="0.243" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.245" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/drawable/search_bg.xml" value="0.245" />
-        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/activity_book_detail.xml" value="0.25416666666666665" />
+        <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/activity_book_detail.xml" value="0.25" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/activity_comment_and_rate.xml" value="0.25416666666666665" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/activity_list_book.xml" value="0.25416666666666665" />
@@ -32,9 +32,6 @@
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/layout/whishlist_item.xml" value="0.24010416666666667" />
         <entry key="..\:/PRMPrj/Project-PRM/app/src/main/res/menu/menu_botton_nav.xml" value="0.1" />
         <entry key="..\:/Project-PRM/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Project-PRM/app/src/main/res/layout/fragment_cart.xml" value="0.24048913043478262" />
-        <entry key="..\:/Project-PRM/app/src/main/res/layout/fragment_home.xml" value="0.1" />
-        <entry key="..\:/Project-PRM/app/src/main/res/layout/fragment_profile.xml" value="0.1891891891891892" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Project-PRM/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2555" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Project-PRM/app/src/main/res/drawable/background.xml" value="0.2555" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Project-PRM/app/src/main/res/drawable/box6.xml" value="0.2555" />
