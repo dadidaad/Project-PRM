@@ -25,5 +25,5 @@ public interface OrderDao {
     public List<Order> getAll();
 
     @Query("SELECT * FROM `Order` where order_id = :orderId")
-    public List<Order> getById(int orderId);
+    public Order getById(int orderId);
 }

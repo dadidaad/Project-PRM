@@ -1,5 +1,7 @@
 package com.example.projectprm.view.activities;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectprm.R;
+import com.example.projectprm.dao.PriceDAO;
 import com.example.projectprm.model.entities.Book;
 import com.example.projectprm.model.entities.Price;
 import com.example.projectprm.model.repos.AuthorRepository;
@@ -47,11 +50,11 @@ public class BookDetailActivity extends AppCompatActivity {
     Button btn_cmt_rate;
     CartHelper cartHelper;
     Button btn_add_to_cart;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
+
         //Get Data
         int bookId = getIntent().getIntExtra("bookId", 0);
 

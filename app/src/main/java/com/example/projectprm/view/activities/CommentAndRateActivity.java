@@ -5,23 +5,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.media.Image;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.projectprm.R;
 import com.example.projectprm.model.entities.Account;
 import com.example.projectprm.model.entities.Book;
+import com.example.projectprm.model.entities.Order;
 import com.example.projectprm.model.entities.OrderDetail;
+import com.example.projectprm.model.entities.Rating;
+import com.example.projectprm.model.repos.AccountRepository;
 import com.example.projectprm.model.repos.AuthorRepository;
 import com.example.projectprm.model.repos.BookRepository;
 import com.example.projectprm.model.repos.CategoryRepository;
 import com.example.projectprm.model.repos.OrderDetailRepository;
+import com.example.projectprm.model.repos.OrderRepository;
+import com.example.projectprm.model.repos.RatingRepository;
 import com.example.projectprm.session.Session;
 import com.example.projectprm.utils.converters.PathConverter;
 
+import java.util.Date;
 import java.util.List;
 
 public class CommentAndRateActivity extends AppCompatActivity {
@@ -139,9 +147,33 @@ public class CommentAndRateActivity extends AppCompatActivity {
         btnComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean checkOrder = false;
                 Account acc = new Session(getApplication()).getAccount();
                 List<OrderDetail> orderDetailList = new OrderDetailRepository(getApplication()).getByBookId(bookId);
+                for(OrderDetail o : orderDetailList){
+                    int id = o.getOrder_id();
+                    Order order = new OrderRepository(getApplication()).getById(id);
+                    if(order != null){
+                        if(order.getCustomerId() == acc.getAccountId()) checkOrder = true;
+                    }
+                }
 
+                if(!checkOrder){
+                    Toast.makeText(CommentAndRateActivity.this, "You have not bought this book yet", Toast.LENGTH_SHORT).show();
+                }else{
+                    Rating rating = new Rating();
+                    rating.setRateId(4);
+                    rating.setStars(vote);
+                    rating.setAccountId(acc.getAccountId());
+                    rating.setContent(edtComment.getText().toString());
+                    rating.setBookId(bookId);
+                    rating.setOrderId(1);
+                    rating.setRateTime(new Date());
+
+                    new RatingRepository(getApplication()).insert(rating);
+
+                    Toast.makeText(CommentAndRateActivity.this, "Your comment have Added", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
