@@ -13,6 +13,8 @@ import com.example.projectprm.session.Session;
 import com.example.projectprm.model.entities.Account;
 import com.example.projectprm.model.repos.AccountRepository;
 
+import java.util.Date;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextUsername, editTextPassword;
@@ -39,11 +41,14 @@ public class LoginActivity extends AppCompatActivity {
         }
         AccountRepository accountRepository = new AccountRepository(getApplication(), username, password);
         Account account = accountRepository.login();
+        if (accountRepository.isDateNull()) {
+            account.setDateOfBirth(null);
+        }
 
         if (account != null) {
             Session session = new Session(this);
             session.setAccount(account);
-            String user = session.getAccount().getUsername();
+            Date user = session.getAccount().getDateOfBirth();
             Toast.makeText(this, "Welcome " + user, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);

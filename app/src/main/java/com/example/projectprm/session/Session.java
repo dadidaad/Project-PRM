@@ -73,8 +73,11 @@ public class Session {
         prefs.edit().putString("username", account.getUsername()).commit();
         prefs.edit().putString("password", account.getPassword()).commit();
         Date dateOfBirth = account.getDateOfBirth();
-        if (dateOfBirth != null)
+        if (dateOfBirth != null) {
             prefs.edit().putString("dob", dateOfBirth.toString()).commit();
+        } else {
+            prefs.edit().putString("dob", "").commit();
+        }
         String dispName = account.getDisplayName();
         if (dispName != null)
             prefs.edit().putString("dispName", dispName).commit();

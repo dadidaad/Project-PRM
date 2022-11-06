@@ -1,6 +1,7 @@
 package com.example.projectprm.view.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,12 +9,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.projectprm.R;
 import com.example.projectprm.model.entities.Account;
 import com.example.projectprm.session.Session;
+import com.example.projectprm.view.activities.EditProfileActivity;
+import com.example.projectprm.view.activities.ListBookActivity;
+import com.example.projectprm.view.activities.RegisterActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +36,7 @@ public class ProfileFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private TextView txtUserName;
+    private Button buttonUpdateProfile;
     private EditText editTextFullName, editTextDOB, editTextAddress;
 
     public ProfileFragment() {
@@ -71,8 +77,9 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         txtUserName = view.findViewById(R.id.txtUserName);
         editTextFullName = view.findViewById(R.id.editTextFullName);
-        editTextDOB = (EditText) view.findViewById(R.id.editTextDOB);
-        editTextAddress = (EditText) view.findViewById(R.id.editTextAddress);
+        editTextDOB = view.findViewById(R.id.editTextDOB);
+        editTextAddress = view.findViewById(R.id.editTextAddress);
+        buttonUpdateProfile = view.findViewById(R.id.buttonUpdateProfile);
 
         Account acc = new Session(getActivity()).getAccount();
         txtUserName.setText(acc.getUsername());
@@ -85,6 +92,35 @@ public class ProfileFragment extends Fragment {
         if (acc.getDisplayName() != null) {
             editTextFullName.setText(acc.getDisplayName());
         }
+
+        buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (buttonUpdateProfile.getText().toString().matches("edit profile")) {
+                    editTextFullName.setEnabled(true);
+                    editTextDOB.setEnabled(true);
+                    editTextAddress.setEnabled(true);
+                    buttonUpdateProfile.setText("save");
+                } else {
+                    editTextFullName.setEnabled(false);
+                    editTextDOB.setEnabled(false);
+                    editTextAddress.setEnabled(false);
+                    buttonUpdateProfile.setText("edit profile");
+                    updateProfile(editTextFullName.getText().toString(),
+                            editTextDOB.getText().toString(),
+                            editTextAddress.getText().toString());
+                }
+
+            }
+        });
         return view;
+    }
+
+    public void updateProfile(String fullName, String dob, String address){
+        Intent intent = new Intent(this.getContext(), EditProfileActivity.class);
+        intent.putExtra("fullName", fullName);
+        intent.putExtra("dob", dob);
+        intent.putExtra("address", address);
+        startActivity(intent);
     }
 }

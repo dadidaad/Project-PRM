@@ -7,7 +7,9 @@ import com.example.projectprm.dao.AccountDao;
 import com.example.projectprm.dao.DatabaseHelper;
 import com.example.projectprm.dao.room.AccountDatabase;
 import com.example.projectprm.model.entities.Account;
+import com.example.projectprm.session.Session;
 
+import java.util.Date;
 import java.util.List;
 
 public class AccountRepository {
@@ -15,6 +17,7 @@ public class AccountRepository {
     private AccountDao accountDao;
 
     private Account login;
+    private Date checkDate;
     private boolean isAccountExist;
 
     public AccountRepository(Application application){
@@ -31,13 +34,24 @@ public class AccountRepository {
         AccountDatabase accountDatabase = AccountDatabase.getINSTANCE(application);
         accountDao = accountDatabase.accountDao();
         login = accountDao.login(username, password);
+        checkDate = accountDao.isDobNull(username, password);
     }
 
-    public AccountRepository(Application application, String username, String password, String type) {
+    public AccountRepository(Application application, String username, String password, String type, int option) {
         AccountDatabase accountDatabase = AccountDatabase.getINSTANCE(application);
         accountDao = accountDatabase.accountDao();
         Account account = new Account(username, password, type);
         accountDao.insert(account);
+    }
+
+    public AccountRepository(Application application, String fullName, Date dob, String address){
+        AccountDatabase accountDatabase = AccountDatabase.getINSTANCE(application);
+        accountDao = accountDatabase.accountDao();
+        Account account = new Session(application).getAccount();
+        account.setDisplayName(fullName);
+        account.setDateOfBirth(dob);
+        account.setAddress(address);
+        accountDao.update(account);
     }
 
     public void insert(Account model) {
@@ -57,6 +71,7 @@ public class AccountRepository {
     public Account login() {return login;}
     public Account getById(int accId){return accountDao.getById(accId);}
     public boolean isUserExist(String username) {return isAccountExist;}
+    public boolean isDateNull() {return checkDate == null;}
 
     private static class InsertCourseAsyncTask extends AsyncTask<Account, Void, Void> {
         private AccountDao accountDao;
