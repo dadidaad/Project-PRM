@@ -16,6 +16,7 @@ import com.example.projectprm.model.entities.Category;
 import com.example.projectprm.model.entities.Rating;
 import com.example.projectprm.model.repos.AccountRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.ReviewListViewHolder> {
@@ -40,7 +41,9 @@ public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.Re
     @Override
     public void onBindViewHolder(@NonNull ReviewListViewHolder holder, int position) {
         holder.txtUserName.setText(accounts.get(position).getDisplayName());
-        holder.txtReviewDate.setText(String.valueOf(ratingList.get(position).getRateTime()));
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = formatter.format(ratingList.get(position).getRateTime());
+        holder.txtReviewDate.setText(strDate);
         holder.txtReviewContent.setText(ratingList.get(position).getContent());
 
         if(ratingList.get(position).getStars() < 1 ){
