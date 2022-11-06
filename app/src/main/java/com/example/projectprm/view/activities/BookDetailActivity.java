@@ -1,7 +1,5 @@
 package com.example.projectprm.view.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,13 +15,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.projectprm.R;
-import com.example.projectprm.dao.PriceDAO;
 import com.example.projectprm.model.entities.Book;
+import com.example.projectprm.model.entities.Price;
 import com.example.projectprm.model.repos.AuthorRepository;
 import com.example.projectprm.model.repos.BookRepository;
 import com.example.projectprm.model.repos.PriceRepository;
+import com.example.projectprm.utils.CartHelper;
 import com.example.projectprm.utils.converters.PathConverter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BookDetailActivity extends AppCompatActivity {
 
@@ -43,13 +45,13 @@ public class BookDetailActivity extends AppCompatActivity {
     TextView txtDescription;
 
     Button btn_cmt_rate;
-
+    CartHelper cartHelper;
     Button btn_add_to_cart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
-
         //Get Data
         int bookId = getIntent().getIntExtra("bookId", 0);
 
@@ -69,7 +71,7 @@ public class BookDetailActivity extends AppCompatActivity {
         txtBookAuthor = findViewById(R.id.txtBookAuthor);
         txtDescription = findViewById(R.id.txtDescription);
 
-        int resID = new PathConverter().GetResource(this,book.getImage());
+        int resID = new PathConverter().GetResource(this, book.getImage());
         bookDetailImage.setImageResource(resID);
         gallery1.setImageResource(resID);
         gallery2.setImageResource(resID);
@@ -100,24 +102,25 @@ public class BookDetailActivity extends AppCompatActivity {
                 openDialogWhish(Gravity.CENTER);
             }
         });
+        cartHelper = new CartHelper(getApplication());
         btn_add_to_cart = findViewById(R.id.btn_add_to_cart);
-        btn_add_to_cart.setOnClickListener(new View.OnClickListener(){
+        btn_add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-
+            public void onClick(View v) {
+                addToCart(bookId);
             }
         });
     }
 
 
-    private void openDialogWhish(int gravity){
+    private void openDialogWhish(int gravity) {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.whishlist_dialog);
 
         Window window = dialog.getWindow();
-        if(window == null) return;
-        else{
+        if (window == null) return;
+        else {
             window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -140,14 +143,21 @@ public class BookDetailActivity extends AppCompatActivity {
         addWhish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(BookDetailActivity.this,"This book has been add to your Whishlist",Toast.LENGTH_LONG).show();
+                Toast.makeText(BookDetailActivity.this, "This book has been add to your Whishlist", Toast.LENGTH_LONG).show();
             }
         });
 
         dialog.show();
     }
 
-    public void openCommentView(int bookId){
+    public void addToCart(int bookId) {
+        PriceRepository priceRepository = new PriceRepository(getApplication());
+        Price lastPriceOfBook = priceRepository.getPriceBookID(bookId);
+        cartHelper.add(bookId, 1, lastPriceOfBook);
+        Toast.makeText(this, "Add to cart successfully", Toast.LENGTH_SHORT).show();
+    }
+
+    public void openCommentView(int bookId) {
         Intent intent = new Intent(this, ViewCommentActivity.class);
         intent.putExtra("bookId", bookId);
 

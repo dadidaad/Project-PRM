@@ -62,10 +62,10 @@ public class Session {
     public void saveCart(Map<Integer, Integer> cart, int totalQuantity, BigInteger totalPrice, List<Price> historyPrice) {
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
-        editor.putString("cart", gson.toJson(cart));
-        editor.putString("cart_total_quantity", gson.toJson(totalQuantity));
-        editor.putString("cart_total_price", gson.toJson(totalPrice));
-        editor.putString("cart_history_price", gson.toJson(historyPrice));
+        editor.putString("cart", gson.toJson(cart)).apply();
+        editor.putString("cart_total_quantity", gson.toJson(totalQuantity)).apply();
+        editor.putString("cart_total_price", gson.toJson(totalPrice)).apply();
+        editor.putString("cart_history_price", gson.toJson(historyPrice)).apply();
     }
 
     public void setAccount(Account account) {

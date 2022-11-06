@@ -1,17 +1,16 @@
 package com.example.projectprm.view.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectprm.R;
 import com.example.projectprm.exceptions.BookNotFoundException;
@@ -39,10 +38,10 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartItem
     private String mParam2;
 
     CartHelper cartHelper;
+    RecyclerView recyclerView;
     List<CartItem> cartItems;
     TextView totalPrice, totalQuantity;
     CartItemAdapter cartItemAdapter;
-    RecyclerView recyclerView;
     public CartFragment() {
         // Required empty public constructor
     }
@@ -79,26 +78,31 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartItem
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         recyclerView = view.findViewById(R.id.recyclerview_item_cart_books);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
+
         cartHelper = new CartHelper(this.getActivity().getApplication());
         cartItems = cartHelper.convertFromMapToList();
+        LinearLayout emptyLinerLayout = view.findViewById(R.id.empty_cart);
+        LinearLayout listCartItem = view.findViewById(R.id.ll_item_cart_books);
+        LinearLayout infoCart = view.findViewById(R.id.ll_item);
         if(cartItems.size() == 0){
-            LinearLayout emptyLinerLayout = view.findViewById(R.id.empty_cart);
-            LinearLayout listCartItem = view.findViewById(R.id.ll_item_cart_books);
-            LinearLayout infoCart = view.findViewById(R.id.ll_item);
             emptyLinerLayout.setVisibility(View.VISIBLE);
             listCartItem.setVisibility(View.GONE);
             infoCart.setVisibility(View.GONE);
         }
         else{
-            cartItemAdapter = new CartItemAdapter(this.getActivity().getApplicationContext(), cartItems, this);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+            recyclerView.setLayoutManager(layoutManager);
+            cartItemAdapter = new CartItemAdapter(this.getContext(), cartItems, this);
             recyclerView.setAdapter(cartItemAdapter);
             totalPrice = view.findViewById(R.id.textViewTotalPrice);
             totalQuantity = view.findViewById(R.id.textViewTotalQuantity);
             totalQuantity.setText(String.valueOf(cartHelper.getTotalQuantity()));
             totalPrice.setText(cartHelper.getTotalPrice().toString());
+            emptyLinerLayout.setVisibility(View.GONE);
+            listCartItem.setVisibility(View.VISIBLE);
+            infoCart.setVisibility(View.VISIBLE);
         }
-        return inflater.inflate(R.layout.fragment_cart, container, false);
+        return view;
     }
 
     @Override

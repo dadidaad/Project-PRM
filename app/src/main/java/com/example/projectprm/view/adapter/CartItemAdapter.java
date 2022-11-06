@@ -21,7 +21,6 @@ import java.util.List;
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartItemViewHolder> {
     Context context;
     List<CartItem> cartItems;
-    CartItem cartItem;
     OnCartItemListener onCartItemListener;
 
     public CartItemAdapter(Context context, List<CartItem> cartItems, OnCartItemListener onCartItemListener) {
@@ -33,13 +32,13 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     @NonNull
     @Override
     public CartItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.cart_list_item, parent,false);
-        return new CartItemViewHolder(view, onCartItemListener);
+        View view = LayoutInflater.from(context).inflate(R.layout.cart_list_item, parent, false);
+        return new CartItemAdapter.CartItemViewHolder(view, onCartItemListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CartItemViewHolder holder, int position) {
-        cartItem = cartItems.get(position);
+        CartItem cartItem = cartItems.get(position);
         int resID = new PathConverter().GetResource(context, cartItem.getBook().getImage());
         Picasso.with(context).load(resID).into(holder.bookImage);
         holder.bookName.setText(cartItem.getBook().getBookName());
@@ -47,7 +46,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         holder.bookAuthor.setText(cartItem.getAuthorName());
         holder.bookQuantity.setText(String.valueOf(cartItem.getQuantity()));
         holder.bookId.setText(String.valueOf(cartItem.getBook().getBookID()));
-        holder.bookOldPrice.setText(String.valueOf(cartItem.getOldPrice().getPrice()));
+        holder.bookOldPrice.setText(cartItem.getOldPrice() == null ? "" : String.valueOf(cartItem.getOldPrice().getPrice()));
         holder.bookNewPrice.setText(String.valueOf(cartItem.getNewPrice().getPrice()));
     }
 
@@ -74,6 +73,9 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
             bookOldPrice = itemView.findViewById(R.id.book_old_price);
             bookNewPrice = itemView.findViewById(R.id.book_new_price);
             bookId = itemView.findViewById(R.id.book_id);
+            cartAdd = itemView.findViewById(R.id.cart_add);
+            cartMinus = itemView.findViewById(R.id.cart_minus);
+            cartDelete = itemView.findViewById(R.id.cart_delete);
             this.onCartItemListener = onCartItemListener;
             cartAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
