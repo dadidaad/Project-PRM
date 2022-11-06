@@ -20,9 +20,12 @@ import android.widget.Toast;
 import com.example.projectprm.R;
 import com.example.projectprm.dao.PriceDAO;
 import com.example.projectprm.model.entities.Book;
+import com.example.projectprm.model.entities.WhishList;
 import com.example.projectprm.model.repos.AuthorRepository;
 import com.example.projectprm.model.repos.BookRepository;
 import com.example.projectprm.model.repos.PriceRepository;
+import com.example.projectprm.model.repos.WhishListRepository;
+import com.example.projectprm.session.Session;
 import com.example.projectprm.utils.converters.PathConverter;
 
 public class BookDetailActivity extends AppCompatActivity {
@@ -45,13 +48,15 @@ public class BookDetailActivity extends AppCompatActivity {
     Button btn_cmt_rate;
 
     Button btn_add_to_cart;
+
+    int bookId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
 
         //Get Data
-        int bookId = getIntent().getIntExtra("bookId", 0);
+        bookId = getIntent().getIntExtra("bookId", 0);
 
         Book book = new BookRepository(this.getApplication()).getByID(bookId);
 
@@ -127,8 +132,8 @@ public class BookDetailActivity extends AppCompatActivity {
 
         window.setAttributes(window.getAttributes());
         EditText editText = findViewById(R.id.edt_desc);
-        Button cancel = findViewById(R.id.btn_cancel);
-        Button addWhish = findViewById(R.id.btn_addWhish);
+        Button cancel = dialog.findViewById(R.id.btn_cancel);
+        Button addWhish = dialog.findViewById(R.id.btn_addWhish);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +145,15 @@ public class BookDetailActivity extends AppCompatActivity {
         addWhish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EditText edt_desc = dialog.findViewById(R.id.edt_desc);
+
+                WhishList whishList = new WhishList();
+                whishList.setAccId(new Session(getApplication()).getAccount().getAccountId());
+                whishList.setBookId(bookId);
+                whishList.setDesc(edt_desc.getText().toString());
+
+                new WhishListRepository(getApplication()).insert(whishList);
+
                 Toast.makeText(BookDetailActivity.this,"This book has been add to your Whishlist",Toast.LENGTH_LONG).show();
             }
         });

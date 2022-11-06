@@ -162,10 +162,12 @@ public class CommentAndRateActivity extends AppCompatActivity {
                     Toast.makeText(CommentAndRateActivity.this, "You have not bought this book yet", Toast.LENGTH_SHORT).show();
                 }else{
                     Rating rating = new Rating();
+                    rating.setRateId(4);
                     rating.setStars(vote);
                     rating.setAccountId(acc.getAccountId());
                     rating.setContent(edtComment.getText().toString());
                     rating.setBookId(bookId);
+                    rating.setOrderId(1);
                     rating.setRateTime(new Date());
 
                     new RatingRepository(getApplication()).insert(rating);
