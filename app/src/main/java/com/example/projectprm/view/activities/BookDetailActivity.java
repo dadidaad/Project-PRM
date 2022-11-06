@@ -50,13 +50,15 @@ public class BookDetailActivity extends AppCompatActivity {
     Button btn_cmt_rate;
     CartHelper cartHelper;
     Button btn_add_to_cart;
+
+    int bookId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
 
         //Get Data
-        int bookId = getIntent().getIntExtra("bookId", 0);
+        bookId = getIntent().getIntExtra("bookId", 0);
 
         Book book = new BookRepository(this.getApplication()).getByID(bookId);
 
@@ -132,9 +134,9 @@ public class BookDetailActivity extends AppCompatActivity {
         }
 
         window.setAttributes(window.getAttributes());
-        EditText editText = findViewById(R.id.edt_desc);
-        Button cancel = findViewById(R.id.btn_cancel);
-        Button addWhish = findViewById(R.id.btn_addWhish);
+        EditText editText = dialog.findViewById(R.id.edt_desc);
+        Button cancel = dialog.findViewById(R.id.btn_cancel);
+        Button addWhish = dialog.findViewById(R.id.btn_addWhish);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +148,9 @@ public class BookDetailActivity extends AppCompatActivity {
         addWhish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Intent intent = new Intent(BookDetailActivity.this, WhishListActivity.class);
+                intent.putExtra("bookId", bookId);
+                startActivity(intent);
                 Toast.makeText(BookDetailActivity.this, "This book has been add to your Whishlist", Toast.LENGTH_LONG).show();
             }
         });
