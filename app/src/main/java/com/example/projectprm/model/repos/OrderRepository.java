@@ -10,6 +10,7 @@ import com.example.projectprm.dao.room.OrderDetailDatabase;
 import com.example.projectprm.model.entities.Order;
 import com.example.projectprm.model.entities.OrderDetail;
 
+import java.util.Date;
 import java.util.List;
 
 public class OrderRepository {
@@ -23,6 +24,13 @@ public class OrderRepository {
         new OrderRepository.InsertCourseAsyncTask(orderDAO).execute(model);
     }
 
+    public void insert(Date order_date, Date required_date, int total, int cus_id){
+        orderDAO.insert(order_date, required_date, total, cus_id);
+    }
+
+    public Order getLastOrder(){
+        return orderDAO.getLastOrder();
+    }
     // creating a method to update data in database.
     public void update(Order model) {
         new OrderRepository.UpdateCourseAsyncTask(orderDAO).execute(model);

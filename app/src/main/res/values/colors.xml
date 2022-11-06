@@ -9,5 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary_color">#327efa</color>
     <color name="yellow">#FFEB3B</color>
-
+    <color name="colorPrimaryPink">#F65C8C</color>
+    <color name="colorPrimaryDarkPink">#F5447B</color>
+    <color name="colorIvoryPink">#FAE2E2</color>
 </resources>
