@@ -26,4 +26,7 @@ public interface OrderDetailDAO {
 
     @Query("SELECT book_id from `Order Detail` Group by book_id order by Sum(quantity) DESC ")
     public List<Integer> getBestSellingBookID();
+
+    @Query("SELECT  * from `Order Detail` where book_id = :bookId")
+    public List<OrderDetail> getByBookId(int bookId);
 }

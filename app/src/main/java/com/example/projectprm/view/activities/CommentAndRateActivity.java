@@ -12,11 +12,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.projectprm.R;
+import com.example.projectprm.model.entities.Account;
 import com.example.projectprm.model.entities.Book;
+import com.example.projectprm.model.entities.OrderDetail;
 import com.example.projectprm.model.repos.AuthorRepository;
 import com.example.projectprm.model.repos.BookRepository;
 import com.example.projectprm.model.repos.CategoryRepository;
+import com.example.projectprm.model.repos.OrderDetailRepository;
+import com.example.projectprm.session.Session;
 import com.example.projectprm.utils.converters.PathConverter;
+
+import java.util.List;
 
 public class CommentAndRateActivity extends AppCompatActivity {
 
@@ -126,6 +132,16 @@ public class CommentAndRateActivity extends AppCompatActivity {
                 imgVote4.setColorFilter(getResources().getColor(R.color.yellow));
                 imgVote5.setColorFilter(getResources().getColor(R.color.yellow));
                 vote = 5;
+            }
+        });
+
+        btnComment = findViewById(R.id.btnComment);
+        btnComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Account acc = new Session(getApplication()).getAccount();
+                List<OrderDetail> orderDetailList = new OrderDetailRepository(getApplication()).getByBookId(bookId);
+
             }
         });
 
