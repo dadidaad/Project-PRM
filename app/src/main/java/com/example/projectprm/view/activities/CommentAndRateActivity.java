@@ -3,6 +3,7 @@ package com.example.projectprm.view.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.provider.Telephony;
@@ -50,6 +51,7 @@ public class CommentAndRateActivity extends AppCompatActivity {
 
     Button btnComment;
 
+    int bookId;
     int vote = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,7 @@ public class CommentAndRateActivity extends AppCompatActivity {
 
         edtComment= findViewById(R.id.edtComment);
 
-        int bookId = getIntent().getIntExtra("bookId",0);
+        bookId = getIntent().getIntExtra("bookId",0);
 
         Book book = new BookRepository(this.getApplication()).getByID(bookId);
 
@@ -171,7 +173,9 @@ public class CommentAndRateActivity extends AppCompatActivity {
                     rating.setRateTime(new Date());
 
                     new RatingRepository(getApplication()).insert(rating);
-
+                    Intent intent = new Intent(CommentAndRateActivity.this, ViewCommentActivity.class);
+                    intent.putExtra("bookId", bookId);
+                    startActivity(intent);
                     Toast.makeText(CommentAndRateActivity.this, "Your comment have Added", Toast.LENGTH_SHORT).show();
                 }
             }
