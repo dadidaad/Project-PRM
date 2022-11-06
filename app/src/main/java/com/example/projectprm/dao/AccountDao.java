@@ -36,6 +36,9 @@ public interface AccountDao {
 
     @Query("SELECT * FROM `Account` WHERE username = :username")
     public boolean isUserExist(String username);
+
+    @Query("UPDATE `Account` SET password = :password WHERE acc_id = :acc_id")
+    public int changePassword(String password, int acc_id);
 /*
     @Query("INSERT INTO Account (username, password, dob, disp_name, address, type, created_date)\n" +
             "VALUES (:username, :password, '', '', '', 'Customer', '')")

@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         AccountRepository accountRepository = new AccountRepository(getApplication(), username, password);
         Account account = accountRepository.login();
         if (accountRepository.isDateNull()) {
-            account.setDateOfBirth(null);
+/*            account.setDateOfBirth(null);*/
         }
 
         if (account != null) {

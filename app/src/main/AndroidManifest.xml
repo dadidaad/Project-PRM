@@ -29,6 +29,9 @@
             android:name=".view.activities.CommentAndRateActivity"
             android:exported="false" />
         <activity
+            android:name=".view.activities.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activities.EditProfileActivity"
             android:exported="false" />
         <activity

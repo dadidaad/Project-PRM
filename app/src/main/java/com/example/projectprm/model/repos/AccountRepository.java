@@ -18,6 +18,7 @@ public class AccountRepository {
 
     private Account login;
     private Date checkDate;
+    private int change;
     private boolean isAccountExist;
 
     public AccountRepository(Application application){
@@ -54,6 +55,12 @@ public class AccountRepository {
         accountDao.update(account);
     }
 
+    public AccountRepository(Application application, String password, int accId) {
+        AccountDatabase accountDatabase = AccountDatabase.getINSTANCE(application);
+        accountDao = accountDatabase.accountDao();
+        change = accountDao.changePassword(password, accId);
+    }
+
     public void insert(Account model) {
         new AccountRepository.InsertCourseAsyncTask(accountDao).execute(model);
     }
@@ -72,6 +79,7 @@ public class AccountRepository {
     public Account getById(int accId){return accountDao.getById(accId);}
     public boolean isUserExist(String username) {return isAccountExist;}
     public boolean isDateNull() {return checkDate == null;}
+    public int changePassword() {return change;}
 
     private static class InsertCourseAsyncTask extends AsyncTask<Account, Void, Void> {
         private AccountDao accountDao;

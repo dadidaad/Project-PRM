@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.projectprm.R;
 import com.example.projectprm.model.entities.Account;
 import com.example.projectprm.session.Session;
+import com.example.projectprm.view.activities.ChangePasswordActivity;
 import com.example.projectprm.view.activities.EditProfileActivity;
 import com.example.projectprm.view.activities.ListBookActivity;
 import com.example.projectprm.view.activities.RegisterActivity;
@@ -36,7 +37,7 @@ public class ProfileFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private TextView txtUserName;
-    private Button buttonUpdateProfile;
+    private Button buttonUpdateProfile, buttonChangePassword;
     private EditText editTextFullName, editTextDOB, editTextAddress;
 
     public ProfileFragment() {
@@ -80,6 +81,7 @@ public class ProfileFragment extends Fragment {
         editTextDOB = view.findViewById(R.id.editTextDOB);
         editTextAddress = view.findViewById(R.id.editTextAddress);
         buttonUpdateProfile = view.findViewById(R.id.buttonUpdateProfile);
+        buttonChangePassword = view.findViewById(R.id.buttonChangePassword);
 
         Account acc = new Session(getActivity()).getAccount();
         txtUserName.setText(acc.getUsername());
@@ -110,7 +112,13 @@ public class ProfileFragment extends Fragment {
                             editTextDOB.getText().toString(),
                             editTextAddress.getText().toString());
                 }
+            }
+        });
 
+        buttonChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changePassword();
             }
         });
         return view;
@@ -121,6 +129,11 @@ public class ProfileFragment extends Fragment {
         intent.putExtra("fullName", fullName);
         intent.putExtra("dob", dob);
         intent.putExtra("address", address);
+        startActivity(intent);
+    }
+
+    public void changePassword() {
+        Intent intent = new Intent(this.getContext(), ChangePasswordActivity.class);
         startActivity(intent);
     }
 }
