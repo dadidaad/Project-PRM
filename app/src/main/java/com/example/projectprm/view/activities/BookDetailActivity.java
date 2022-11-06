@@ -57,6 +57,7 @@ public class BookDetailActivity extends AppCompatActivity {
     TextView textViewQuantityToCart;
 
     int bookId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
