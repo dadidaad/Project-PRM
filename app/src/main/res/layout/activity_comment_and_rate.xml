@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView9"
+            android:id="@+id/imgCommentBookCover"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
             app:srcCompat="@drawable/cover_book" />
 
         <TextView
-            android:id="@+id/textView28"
+            android:id="@+id/txtCommentBookName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -33,40 +33,40 @@
             android:text="Classroom of the elite"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView9"
+            app:layout_constraintStart_toEndOf="@+id/imgCommentBookCover"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView30"
+            android:id="@+id/txtCommentAuthor"
             android:layout_width="58dp"
             android:layout_height="16dp"
             android:layout_marginTop="8dp"
             android:text="Kinugasa"
-            app:layout_constraintStart_toStartOf="@+id/textView28"
-            app:layout_constraintTop_toBottomOf="@+id/textView28" />
+            app:layout_constraintStart_toStartOf="@+id/txtCommentBookName"
+            app:layout_constraintTop_toBottomOf="@+id/txtCommentBookName" />
 
         <TextView
-            android:id="@+id/textView31"
+            android:id="@+id/txtCommentCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="Light Novel"
-            app:layout_constraintStart_toStartOf="@+id/textView30"
-            app:layout_constraintTop_toBottomOf="@+id/textView30" />
+            app:layout_constraintStart_toStartOf="@+id/txtCommentAuthor"
+            app:layout_constraintTop_toBottomOf="@+id/txtCommentAuthor" />
 
         <ImageView
             android:id="@+id/imageView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:tint="#e9fa02"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+            app:tint="#e9fa02"
+            app:layout_constraintBottom_toBottomOf="@+id/imgCommentBookCover"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_star_24" />
 
         <TextView
-            android:id="@+id/textView32"
+            android:id="@+id/txtCommentAvgStar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="9dp"
@@ -100,57 +100,52 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/imgVote1"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="32dp"
-            android:tint="#e9fa02"
             app:layout_constraintStart_toStartOf="@+id/textView33"
             app:layout_constraintTop_toBottomOf="@+id/textView33"
             app:srcCompat="@drawable/ic_baseline_star_24" />
 
         <ImageView
-            android:id="@+id/imageView13"
+            android:id="@+id/imgVote2"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
-            android:tint="#e9fa02"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-            app:layout_constraintStart_toEndOf="@+id/imageView11"
-            app:layout_constraintTop_toTopOf="@+id/imageView11"
+            app:layout_constraintBottom_toBottomOf="@+id/imgVote1"
+            app:layout_constraintStart_toEndOf="@+id/imgVote1"
+            app:layout_constraintTop_toTopOf="@+id/imgVote1"
             app:srcCompat="@drawable/ic_baseline_star_24" />
 
         <ImageView
-            android:id="@+id/imageView14"
+            android:id="@+id/imgVote3"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
-            android:tint="#e9fa02"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView13"
-            app:layout_constraintStart_toEndOf="@+id/imageView13"
-            app:layout_constraintTop_toTopOf="@+id/imageView13"
+            app:layout_constraintBottom_toBottomOf="@+id/imgVote2"
+            app:layout_constraintStart_toEndOf="@+id/imgVote2"
+            app:layout_constraintTop_toTopOf="@+id/imgVote2"
             app:srcCompat="@drawable/ic_baseline_star_24" />
 
         <ImageView
-            android:id="@+id/imageView15"
+            android:id="@+id/imgVote4"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
-            android:tint="#e9fa02"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView14"
-            app:layout_constraintStart_toEndOf="@+id/imageView14"
-            app:layout_constraintTop_toTopOf="@+id/imageView14"
+            app:layout_constraintBottom_toBottomOf="@+id/imgVote3"
+            app:layout_constraintStart_toEndOf="@+id/imgVote3"
+            app:layout_constraintTop_toTopOf="@+id/imgVote3"
             app:srcCompat="@drawable/ic_baseline_star_24" />
 
         <ImageView
-            android:id="@+id/imageView16"
+            android:id="@+id/imgVote5"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
-            android:tint="#e9fa02"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView15"
-            app:layout_constraintStart_toEndOf="@+id/imageView15"
-            app:layout_constraintTop_toTopOf="@+id/imageView15"
+            app:layout_constraintBottom_toBottomOf="@+id/imgVote4"
+            app:layout_constraintStart_toEndOf="@+id/imgVote4"
+            app:layout_constraintTop_toTopOf="@+id/imgVote4"
             app:srcCompat="@drawable/ic_baseline_star_24" />
 
         <TextView
@@ -163,10 +158,10 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+            app:layout_constraintTop_toBottomOf="@+id/imgVote1" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/edtComment"
             android:layout_width="0dp"
             android:layout_height="212dp"
             android:layout_marginStart="32dp"
@@ -176,17 +171,20 @@
             android:ems="10"
             android:hint="Enter your comments here"
             android:inputType="textPersonName"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btnComment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
             android:text="Submit Rate And Comment"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

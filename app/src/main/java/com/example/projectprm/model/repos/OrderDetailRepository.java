@@ -43,6 +43,7 @@ public class OrderDetailRepository {
         return allOrderDetails;
     }
     public List<Integer> getListBestSellingBookID(){return listBestSellingBookID;}
+    public List<OrderDetail> getByBookId(int bookId) {return orderDetailDAO.getByBookId(bookId);}
 
 
     private static class InsertCourseAsyncTask extends AsyncTask<OrderDetail, Void, Void> {

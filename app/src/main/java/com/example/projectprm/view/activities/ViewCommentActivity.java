@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.projectprm.R;
@@ -30,6 +32,8 @@ public class ViewCommentActivity extends AppCompatActivity {
 
     private List<Rating> ratingList;
     private List<Account> accountList;
+
+    private TextView txtCreateComment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,7 @@ public class ViewCommentActivity extends AppCompatActivity {
         reviewListRec = findViewById(R.id.reviewListRec);
 
         txtBookReviewName.setText(book.getBookName());
+        txtCreateComment = findViewById(R.id.txtCreateComment);
 
         ratingList = new RatingRepository(this.getApplication()).getRatingsBook(book.getBookID());
 
@@ -62,6 +67,14 @@ public class ViewCommentActivity extends AppCompatActivity {
             accountList.add(a);
         }
 
+        txtCreateComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewCommentActivity.this, CommentAndRateActivity.class);
+                intent.putExtra("bookId", bookId);
+                startActivity(intent);
+            }
+        });
         setAdapterRatingRec(ratingList, accountList);
     }
 
