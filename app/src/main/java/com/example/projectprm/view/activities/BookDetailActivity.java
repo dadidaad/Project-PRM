@@ -146,6 +146,7 @@ public class BookDetailActivity extends AppCompatActivity {
         addWhish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                
                 Toast.makeText(BookDetailActivity.this, "This book has been add to your Whishlist", Toast.LENGTH_LONG).show();
             }
         });

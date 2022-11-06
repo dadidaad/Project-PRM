@@ -9,14 +9,21 @@ import androidx.room.DatabaseConfiguration;
 import androidx.room.InvalidationTracker;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.example.projectprm.dao.AccountDao;
 import com.example.projectprm.dao.WhishListDao;
+import com.example.projectprm.model.entities.Account;
+import com.example.projectprm.model.entities.Author;
+import com.example.projectprm.model.entities.Book;
+import com.example.projectprm.model.entities.Category;
 import com.example.projectprm.model.entities.WhishList;
+import com.example.projectprm.utils.converters.DateConverter;
 
-@Database(entities = {WhishList.class}, version = 1, exportSchema = false)
+@Database(entities = {WhishList.class, Account.class, Book.class, Author.class, Category.class}, version = 1, exportSchema = false)
+@TypeConverters({DateConverter.class})
 public abstract class WhishListDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "script.db";

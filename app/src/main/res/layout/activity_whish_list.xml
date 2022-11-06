@@ -26,7 +26,7 @@
             />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listBookRec"
+            android:id="@+id/listWishBookRec"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -35,7 +35,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView36" />
+            app:layout_constraintTop_toBottomOf="@+id/txtNumberOfWishBook" />
 
         <TextView
             android:id="@+id/filterText"
@@ -51,7 +51,7 @@
             app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
         <TextView
-            android:id="@+id/textView36"
+            android:id="@+id/txtNumberOfWishBook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -65,8 +65,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#f07d11"
             android:text="Delete"
-            app:layout_constraintBottom_toBottomOf="@+id/textView36"
+            app:layout_constraintBottom_toBottomOf="@+id/txtNumberOfWishBook"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView36" />
+            app:layout_constraintTop_toTopOf="@+id/txtNumberOfWishBook" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

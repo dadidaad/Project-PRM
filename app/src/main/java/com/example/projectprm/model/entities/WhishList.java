@@ -3,12 +3,16 @@ package com.example.projectprm.model.entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "WhishList", primaryKeys = {"acc_Id","book_id"})
+@Entity(tableName = "WhishList", primaryKeys = {"acc_id","book_id"}, foreignKeys = {
+        @ForeignKey(entity = Account.class, parentColumns = "acc_id", childColumns = "acc_id"
+        ),
+        @ForeignKey(entity = Book.class, parentColumns = "book_id", childColumns = "book_id")})
 public class WhishList {
     @NonNull
-    @ColumnInfo(name = "acc_Id")
+    @ColumnInfo(name = "acc_id")
     private int accId;
 
     @NonNull
