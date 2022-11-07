@@ -39,6 +39,12 @@ public interface AccountDao {
 
     @Query("UPDATE `Account` SET password = :password WHERE acc_id = :acc_id")
     public int changePassword(String password, int acc_id);
+
+    @Query("UPDATE `Account` SET dob = :dob, disp_name = :fullName, address = :address WHERE acc_id = :acc_id")
+    public int editProfile(String fullName, String address, int dob, int acc_id);
+
+    @Query("SELECT dob FROM `Account` WHERE username = :username AND password = :password")
+    public int getDobByAccId(String username, String password);
 /*
     @Query("INSERT INTO Account (username, password, dob, disp_name, address, type, created_date)\n" +
             "VALUES (:username, :password, '', '', '', 'Customer', '')")

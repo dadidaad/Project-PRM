@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(tableName = "Account", indices = {@Index(value = {"username"},unique = true)})
+@Entity(tableName = "Account", indices = {@Index(value = {"username"}, unique = true)})
 public class Account {
 
     @PrimaryKey(autoGenerate = true)
@@ -40,7 +40,21 @@ public class Account {
     @ColumnInfo(name = "created_date")
     private Date createdDate;
 
+    @ColumnInfo(name = "phone")
+    private String phone;
+
     public Account() {
+    }
+
+    public Account(int accountId, @NonNull String username, @NonNull String password, Date dateOfBirth, String displayName, String address, @NonNull String type, String phone) {
+        this.accountId = accountId;
+        this.username = username;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+        this.displayName = displayName;
+        this.address = address;
+        this.type = type;
+        this.phone = phone;
     }
 
     public Account(int accountId, @NonNull String username, @NonNull String password, Date dateOfBirth, String displayName, String address, @NonNull String type) {
@@ -51,6 +65,7 @@ public class Account {
         this.displayName = displayName;
         this.address = address;
         this.type = type;
+        this.phone = phone;
     }
 
     public Account(@NonNull String username, @NonNull String password, @NonNull String type) {
@@ -124,5 +139,13 @@ public class Account {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.projectprm.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.example.projectprm.exceptions.QuantityOutOfRangeException;
 import com.example.projectprm.model.CartItem;
 import com.example.projectprm.utils.CartHelper;
 import com.example.projectprm.view.activities.MainActivity;
+import com.example.projectprm.view.activities.PlaceOrderActivity;
 import com.example.projectprm.view.adapter.CartItemAdapter;
 
 import java.util.List;
@@ -45,6 +47,7 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartItem
     TextView totalPrice, totalQuantity;
     CartItemAdapter cartItemAdapter;
     Button btnClearAll;
+    Button placeOrder;
     public CartFragment() {
         // Required empty public constructor
     }
@@ -113,9 +116,20 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartItem
                 updateCart();
             }
         });
+        placeOrder = view.findViewById(R.id.proceed);
+        placeOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startOrder();
+            }
+        });
         return view;
     }
 
+    public void startOrder(){
+        Intent intent = new Intent(this.getContext(), PlaceOrderActivity.class);
+        startActivity(intent);
+    }
     @Override
     public void onQuantityReduced(int position) {
         CartItem cartItem = cartItems.get(position);

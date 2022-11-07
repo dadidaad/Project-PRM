@@ -72,12 +72,6 @@ public class Session {
         prefs.edit().putInt("acc_id", account.getAccountId()).commit();
         prefs.edit().putString("username", account.getUsername()).commit();
         prefs.edit().putString("password", account.getPassword()).commit();
-        Date dateOfBirth = account.getDateOfBirth();
-        if (dateOfBirth != null) {
-            prefs.edit().putString("dob", dateOfBirth.toString()).commit();
-        } else {
-            prefs.edit().putString("dob", "").commit();
-        }
         String dispName = account.getDisplayName();
         if (dispName != null)
             prefs.edit().putString("dispName", dispName).commit();
@@ -91,10 +85,11 @@ public class Session {
         int acc_id = prefs.getInt("acc_id", 0);
         String username = prefs.getString("username", "");
         String password = prefs.getString("password", "");
-        String dob = prefs.getString("dob", "");
+        Integer dob = prefs.getInt("dob", 0);
         Date dateOfBirth = new Date();
         try {
-            dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse(dob);
+            SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
+            dateOfBirth = originalFormat.parse(dob.toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -103,5 +98,13 @@ public class Session {
         String type = prefs.getString("type", "");
 
         return new Account(acc_id, username, password, dateOfBirth, dispName, address, type);
+    }
+
+    public void removeSession() {
+/*        prefs.edit().clear();*/
+    }
+
+    public void setDate(int date) {
+        prefs.edit().putInt("dob", date).commit();
     }
 }

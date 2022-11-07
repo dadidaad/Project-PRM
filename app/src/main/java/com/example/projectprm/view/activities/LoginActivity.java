@@ -13,6 +13,7 @@ import com.example.projectprm.session.Session;
 import com.example.projectprm.model.entities.Account;
 import com.example.projectprm.model.repos.AccountRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class LoginActivity extends AppCompatActivity {
@@ -41,15 +42,18 @@ public class LoginActivity extends AppCompatActivity {
         }
         AccountRepository accountRepository = new AccountRepository(getApplication(), username, password);
         Account account = accountRepository.login();
-        if (accountRepository.isDateNull()) {
-/*            account.setDateOfBirth(null);*/
-        }
+        int date = accountRepository.getDate();
 
         if (account != null) {
             Session session = new Session(this);
             session.setAccount(account);
+            session.setDate(date);
             Date user = session.getAccount().getDateOfBirth();
-            Toast.makeText(this, "Welcome " + user, Toast.LENGTH_SHORT).show();
+            String pattern = "MM-dd-yyyy";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String date1 = simpleDateFormat.format(user);
+            System.out.println(date);
+            Toast.makeText(this, "Welcome " + date1, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }else{

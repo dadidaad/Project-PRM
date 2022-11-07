@@ -13,6 +13,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.projectprm.dao.AccountDao;
 import com.example.projectprm.model.entities.Account;
 import com.example.projectprm.utils.converters.DateConverter;
+import com.example.projectprm.utils.converters.IntConverter;
 
 @Database(entities = {Account.class}, version = 1, exportSchema = false)
 @TypeConverters({DateConverter.class})

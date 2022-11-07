@@ -19,7 +19,10 @@ import com.example.projectprm.session.Session;
 import com.example.projectprm.view.activities.ChangePasswordActivity;
 import com.example.projectprm.view.activities.EditProfileActivity;
 import com.example.projectprm.view.activities.ListBookActivity;
+import com.example.projectprm.view.activities.LoginActivity;
 import com.example.projectprm.view.activities.RegisterActivity;
+
+import java.text.SimpleDateFormat;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,7 +40,7 @@ public class ProfileFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private TextView txtUserName;
-    private Button buttonUpdateProfile, buttonChangePassword;
+    private Button buttonUpdateProfile, buttonChangePassword, buttonLogOut;
     private EditText editTextFullName, editTextDOB, editTextAddress;
 
     public ProfileFragment() {
@@ -82,11 +85,15 @@ public class ProfileFragment extends Fragment {
         editTextAddress = view.findViewById(R.id.editTextAddress);
         buttonUpdateProfile = view.findViewById(R.id.buttonUpdateProfile);
         buttonChangePassword = view.findViewById(R.id.buttonChangePassword);
+        buttonLogOut = view.findViewById(R.id.buttonLogOut);
 
         Account acc = new Session(getActivity()).getAccount();
         txtUserName.setText(acc.getUsername());
         if (acc.getDateOfBirth() != null) {
-            editTextDOB.setText(acc.getDateOfBirth().toString());
+            String pattern = "MM-dd-yyyy";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String date1 = simpleDateFormat.format(acc.getDateOfBirth());
+            editTextDOB.setText(date1);
         }
         if (acc.getAddress() != null) {
             editTextAddress.setText(acc.getAddress());
@@ -99,10 +106,11 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (buttonUpdateProfile.getText().toString().matches("edit profile")) {
+                    buttonUpdateProfile.setText("save");
                     editTextFullName.setEnabled(true);
                     editTextDOB.setEnabled(true);
                     editTextAddress.setEnabled(true);
-                    buttonUpdateProfile.setText("save");
+
                 } else {
                     editTextFullName.setEnabled(false);
                     editTextDOB.setEnabled(false);
@@ -121,6 +129,12 @@ public class ProfileFragment extends Fragment {
                 changePassword();
             }
         });
+        buttonLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logOut();
+            }
+        });
         return view;
     }
 
@@ -134,6 +148,13 @@ public class ProfileFragment extends Fragment {
 
     public void changePassword() {
         Intent intent = new Intent(this.getContext(), ChangePasswordActivity.class);
+        startActivity(intent);
+    }
+
+    public void logOut() {
+        Session session = new Session(getActivity());
+        session.removeSession();
+        Intent intent = new Intent(this.getContext(), LoginActivity.class);
         startActivity(intent);
     }
 }

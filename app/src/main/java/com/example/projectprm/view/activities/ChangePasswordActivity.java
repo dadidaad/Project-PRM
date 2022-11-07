@@ -35,7 +35,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             Toast.makeText(this, "Current password is empty", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (currentPassword.matches(new Session(getApplication()).getAccount().getPassword())) {
+        if (!currentPassword.matches(new Session(getApplication()).getAccount().getPassword())) {
             Toast.makeText(this, "Current password incorrect!", Toast.LENGTH_SHORT).show();
             return;
         }
