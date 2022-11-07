@@ -20,6 +20,9 @@ public class BookRepository {
     private List<Book> highestRatBook;
     private List<Book> listGetByCategory;
 
+    public BookRepository() {
+    }
+
     public BookRepository(Application application) {
         BookDatabase categoryDatabase = BookDatabase.getINSTANCE(application);
         bookDAO = categoryDatabase.bookDAO();
@@ -40,7 +43,24 @@ public class BookRepository {
     public void delete(Book model) {
         new BookRepository.DeleteCourseAsyncTask(bookDAO).execute(model);
     }
+    public void insert(Application application,Book book) {
+        BookDatabase Database = BookDatabase.getINSTANCE(application);
+        bookDAO = Database.bookDAO();
+        bookDAO.insert(book);
+    }
 
+    // creating a method to update data in database.
+    public void update(Application application,Book book) {
+        BookDatabase Database = BookDatabase.getINSTANCE(application);
+        bookDAO = Database.bookDAO();
+        bookDAO.update(book);
+    }
+    // creating a method to delete the data in our database.
+    public void delete(Application application,Book book) {
+        BookDatabase Database = BookDatabase.getINSTANCE(application);
+        bookDAO = Database.bookDAO();
+        bookDAO.delete(book);
+    }
     public List<Book> getAll() {
         return allBook;
     }

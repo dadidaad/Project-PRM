@@ -9,13 +9,14 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity(tableName = "Book", foreignKeys = {
         @ForeignKey(entity = Author.class, parentColumns = "author_id", childColumns = "author_id"
         ),
         @ForeignKey(entity = Category.class, parentColumns = "cat_id", childColumns = "cat_id")})
-public class Book {
+public class Book implements Serializable {
     
     @PrimaryKey(autoGenerate = true)
     @NonNull
