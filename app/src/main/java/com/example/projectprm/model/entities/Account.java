@@ -46,7 +46,7 @@ public class Account {
     public Account() {
     }
 
-    public Account(int accountId, @NonNull String username, @NonNull String password, Date dateOfBirth, String displayName, String address, @NonNull String type) {
+    public Account(int accountId, @NonNull String username, @NonNull String password, Date dateOfBirth, String displayName, String address, @NonNull String type, String phone) {
         this.accountId = accountId;
         this.username = username;
         this.password = password;
@@ -54,6 +54,7 @@ public class Account {
         this.displayName = displayName;
         this.address = address;
         this.type = type;
+        this.phone = phone;
     }
 
     public Account(int accountId, @NonNull String username, @NonNull String password, Date dateOfBirth, String displayName, String address, @NonNull String type, String phone) {
